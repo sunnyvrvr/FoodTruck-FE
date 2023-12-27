@@ -1,10 +1,10 @@
-import React from 'react'
-import MapSearch from '../components/MapSearch'
+import React from 'react';
 
 export default function Register() {
   return (
     <div>
-      <MapSearch/>
+      
     </div>
-  )
+  );
 }
+
