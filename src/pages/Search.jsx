@@ -75,7 +75,7 @@ export default function Register(){
         </MapMarker>
       ))}
     </Map>
-      <Footer/>
+      <Footer className='h-xsl'/>
     </div>
   )
 }
