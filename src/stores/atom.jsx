@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function MyRegister() {
+export default function atom() {
   return (
     <div>
-      Register
+      
     </div>
   )
 }

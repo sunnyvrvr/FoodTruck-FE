@@ -58,11 +58,15 @@ export default function Main() {
     setCurrentAdress('')
     setCurrentLocation({ lat:37.56383445090615, lng:126.99059423964209})
   }
+<<<<<<< HEAD
+  
+=======
 
   function handleClicked(key){
     setClickedStore(key)
     console.log(key);
   }
+>>>>>>> 1003ceca55cba8c8aaf92184a5ce356ae3fd9188
   return (
     <div className="h-screen relative">
       <div className="h-xxl w-scree z-0 relative">
@@ -124,8 +128,12 @@ export default function Main() {
       </header>
       
       {currentAdress &&
-      <div className="w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
+      <div className="pl-8 w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
       {currentAdress}
+<<<<<<< HEAD
+      <span className="font-medium text-lg ml-6 mb-1">x</span>
+=======
+>>>>>>> 1003ceca55cba8c8aaf92184a5ce356ae3fd9188
       </div>
       }
       <div className="absolute bottom-20 z-10 w-screen flex h-1/5 justify-center">

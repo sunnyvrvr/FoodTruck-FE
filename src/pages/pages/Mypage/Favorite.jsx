@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function MyRegister() {
+export default function Favorite() {
   return (
     <div>
-      Register
+      Favorite
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function MyRegister() {
+export default function AccountBook() {
   return (
     <div>
-      Register
+      AccountBook
     </div>
   )
 }

@@ -11,6 +11,7 @@ import MyReview from './pages/Mypage/MyReview';
 import TruckInfo from './pages/TruckInfo';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AccountBook from './pages/AccountBook';
+import Search from './pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Main/> },
-      { path: 'main', element: <Main /> },
+      { path: '/', element: <Main /> },
+      { path: '/search/:location', element: <Search /> },
       { path: 'register', element: <Register /> },
       { path: 'myPage', element: <Mypage /> },
       { path: 'myPage/favorite', element: <Favorite /> },
