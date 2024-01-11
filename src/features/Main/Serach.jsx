@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Serach({mapRef, setCurrentAdress, setCurrentLocation}) {
+export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,setMyLocation}) {
     const [searchData, setSearchData] = useState();
     const [dataList, setDataList]= useState();
     const {kakao} =window;
@@ -25,6 +25,7 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation}) {
         const lng = Number(item.location.x)
         setCurrentLocation({lat: lat,lng: lng})
         setCurrentAdress(item.address)
+        setMyLocation({lat: lat,lng: lng})
         map.setLevel(2)
         document.querySelector('#searchBox').style.display='none';
       }

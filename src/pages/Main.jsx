@@ -20,7 +20,7 @@ export default function Main() {
   });
   const [currentAdress, setCurrentAdress]=useState();
   const [currentLevel, setCurrentLevel]= useState(1);
-
+  const [myLocation, setMyLocation]= useState();
 
   useEffect(()=>{
     main(currentLocation.lat,currentLocation.lng,currentLevel)
@@ -58,8 +58,8 @@ export default function Main() {
           }} 
           ref={mapRef}                             // 지도 확대 레벨
         >
-        {currentLocation && <MapMarker 
-        position={currentLocation} image={{src:currMarker, size: {width: 45, height: 55}}}
+        {myLocation && <MapMarker 
+        position={myLocation} image={{src:currMarker, size: {width: 45, height: 55}}}
         />}
 
         {storeData &&  
@@ -79,9 +79,9 @@ export default function Main() {
         </Map>
       </div>
 
-      <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation}/>
+      <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation}/>
       
-      {
+      {currentAdress &&
       <>
         <div className="w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
         {currentAdress}

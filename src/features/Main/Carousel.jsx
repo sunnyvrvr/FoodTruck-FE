@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 export default function Carousel({data}){
   console.log(data)
   const usenavigate =useNavigate();
+
+  function handleChange(index){
+    console.log(data[index])
+    console.log(index)
+  }
   const settings = {
     dots: true,
     infinite: false,
@@ -19,6 +24,7 @@ export default function Carousel({data}){
         <ul className="after:bg-white">{dots}</ul>
       </div>
     ),
+    afterChange: current => handleChange(current)
   };
   return (
     <div className="w-full h-36">
