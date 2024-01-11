@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from '../features/Main/Carousel';
+import Carousel from '../components/Carousel';
 
 export default function Register() {
   return (
