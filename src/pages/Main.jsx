@@ -8,10 +8,13 @@ import currMarker from '../assets/marker_blue.png';
 import Carousel from "../features/Main/Carousel";
 import Serach from "../features/Main/Serach";
 import { main } from "../apis/axios";
+import Markerdesc from "../features/Main/Markerdesc";
+import { Link, useNavigate } from "react-router-dom";
 // import useKakaoLoader from "./useKakaoLoader"
 
 export default function Main() {
   const mapRef = useRef();
+  const usenavigate = useNavigate();
   const [storeData, setStoreData] = useState();
   const [clickedStore, setClickedStore] = useState();
   const [currentLocation, setCurrentLocation]= useState({
@@ -21,6 +24,7 @@ export default function Main() {
   const [currentAdress, setCurrentAdress]=useState();
   const [currentLevel, setCurrentLevel]= useState(1);
   const [myLocation, setMyLocation]= useState();
+  const [forcusingTruck, setForcusingTruck]=useState();
 
   useEffect(()=>{
     main(currentLocation.lat,currentLocation.lng,currentLevel)
@@ -37,9 +41,8 @@ export default function Main() {
 
   }
 
-  function handleClicked(key){
-    setClickedStore(key)
-    console.log(key);
+  function handleClicked(marker){
+    usenavigate(`foodTruck/${marker.storeno}`)
   }
   return (
     <div className="h-screen relative">
@@ -65,21 +68,23 @@ export default function Main() {
         {storeData &&  
         storeData.map((marker, index) => (
         <MapMarker
-          onClick={()=>handleClicked(index)}
+          onClick={()=>handleClicked(marker)}
           key={index}
           position={{"lat":marker.latitude, "lng":marker.longitude}}
           image={{
             src: truckMarker,
             size: { width: 45, height: 55 }
           }}
+          clickable={true}
         >
+        {marker.storeno === forcusingTruck ? <Markerdesc data={marker}/> : ''}
         </MapMarker>
       ))
       }
         </Map>
       </div>
 
-      <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation}/>
+      <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation} />
       
       {currentAdress &&
       <>
@@ -87,7 +92,7 @@ export default function Main() {
         {currentAdress}
         </div>
         <div className="absolute bottom-28 z-10 w-screen flex h-1/5 justify-center">
-          {storeData && <Carousel data={storeData}/>}
+          {storeData && <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck}/>}
         </div>
       </>
       }
