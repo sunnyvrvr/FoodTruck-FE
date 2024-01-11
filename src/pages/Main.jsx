@@ -16,7 +16,6 @@ export default function Main() {
   const mapRef = useRef();
   const slideRef = useRef();
   const [storeData, setStoreData] = useState();
-  const [clickedStore, setClickedStore] = useState();
   const [currentLocation, setCurrentLocation]= useState({
     lat:37.56383445090615,
     lng:126.99059423964209
@@ -26,26 +25,31 @@ export default function Main() {
   const [myLocation, setMyLocation]= useState();
   const [forcusingTruck, setForcusingTruck]=useState();
 
+
   useEffect(()=>{
     main(currentLocation.lat,currentLocation.lng,currentLevel)
     .then(res=>{
       setStoreData(res.data)
-      // console.log(res)
     })
   },[currentLocation,currentLevel])
 
   function handleReset(){
-    document.querySelector('#searchBox').style.display='block';
+    const input =document.querySelector('#searchBox');
+    input.style.display='block';
+    // input.value = '';
     setCurrentAdress('')
     setCurrentLocation({ lat:37.56383445090615, lng:126.99059423964209})
-
   }
-
   function handleClicked(index){
     slideRef.current.slickGoTo(index)
   }
+
+  if(!storeData){return <div>Loading..</div>}
+
   return (
     <div className="h-screen relative">
+
+      {/* 지도 호출 */}
       <div className="h-xxl w-scree z-0 relative">
         <Map 
           id='map'
@@ -59,14 +63,15 @@ export default function Main() {
               lng: map.getCenter().getLng(),
             })
           }} 
-          ref={mapRef}                             // 지도 확대 레벨
-        >
+          ref={mapRef}                             
+          >
+        {/* // 중심 좌표 마커 */}
         {myLocation && <MapMarker 
         position={myLocation} image={{src:currMarker, size: {width: 45, height: 55}}}
         />}
 
-        {storeData &&  
-        storeData.map((marker, index) => (
+        {/* // 가게들 마커 */}
+        {myLocation && storeData.map((marker, index) => (
         <MapMarker
           onClick={()=>handleClicked(index)}
           key={index}
@@ -76,30 +81,37 @@ export default function Main() {
             size: { width: 45, height: 55 }
           }}
           clickable={true}
-        >
+          >
+        {/* // 마커 오버레이(가게 이름) */}
         {marker.storeno === forcusingTruck ? <Markerdesc data={marker}/> : ''}
         </MapMarker>
       ))
       }
         </Map>
-      </div>
+        </div>
 
+
+      {/* 헤더 부분 */}
       <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation} />
       
+
+
+      {/* 몸통 부분 */}
       {currentAdress &&
       <>
         <div className="w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
         {currentAdress}
         </div>
         <div className="absolute bottom-28 z-10 w-screen flex h-1/5 justify-center">
-          {console.log(storeData)}
-          {storeData && <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck} slideRef={slideRef}/>}
+          <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck} slideRef={slideRef}/>
         </div>
       </>
       }
+
+
+
+       {/* 풋터 부분 */}
       <Footer className='z-3 absolute bottom-0'/>
-
-
     </div>
   )
 }
