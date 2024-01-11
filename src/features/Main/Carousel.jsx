@@ -5,8 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import SimpleInfo from './SimpleInfo'
 import { useNavigate } from "react-router-dom";
 
-export default function Carousel({data, setCurrentLocation, setForcusingTruck}){
-  console.log(data)
+export default function Carousel({data, setCurrentLocation, setForcusingTruck, slideRef}){
   const usenavigate =useNavigate();
 
   function handleChange(index){
@@ -32,7 +31,7 @@ export default function Carousel({data, setCurrentLocation, setForcusingTruck}){
   };
   return (
     <div className="w-full h-36">
-      <Slider {...settings}>
+      <Slider {...settings} ref={slideRef}>
         {/* {data.forEach((tiem)=>{
             console.log(tiem)
         })} */}

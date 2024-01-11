@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Main() {
   const mapRef = useRef();
-  const usenavigate = useNavigate();
+  const slideRef = useRef();
   const [storeData, setStoreData] = useState();
   const [clickedStore, setClickedStore] = useState();
   const [currentLocation, setCurrentLocation]= useState({
@@ -41,8 +41,8 @@ export default function Main() {
 
   }
 
-  function handleClicked(marker){
-    usenavigate(`foodTruck/${marker.storeno}`)
+  function handleClicked(index){
+    slideRef.current.slickGoTo(index)
   }
   return (
     <div className="h-screen relative">
@@ -68,7 +68,7 @@ export default function Main() {
         {storeData &&  
         storeData.map((marker, index) => (
         <MapMarker
-          onClick={()=>handleClicked(marker)}
+          onClick={()=>handleClicked(index)}
           key={index}
           position={{"lat":marker.latitude, "lng":marker.longitude}}
           image={{
@@ -92,7 +92,8 @@ export default function Main() {
         {currentAdress}
         </div>
         <div className="absolute bottom-28 z-10 w-screen flex h-1/5 justify-center">
-          {storeData && <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck}/>}
+          {console.log(storeData)}
+          {storeData && <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck} slideRef={slideRef}/>}
         </div>
       </>
       }
