@@ -43,39 +43,47 @@ export default function AccountBook() {
   return (
     <div className="flex flex-col h-screen relative">
       <div className="h-92% w-screen flex-1 overflow-y-auto">
-          <div className="title text-center mb-4 ">가계부</div>
-        <div className="container mx-auto p-4" style={{ position: 'relative' }}>
+        <div className="title text-center mt-4 text-2xl font-weight: 700 font-sans">가계부</div>
+      <div className="container mx-auto p-4" style={{ position: 'relative' }}>
 
           {/* 월 선택 */}
           <div className="text-center mb-4">
             <label className="block mb-2"></label>
             <input
               type="month"
-              className="border p-2"
+              className="border p-2 rounded-lg"
               value={currentMonth}
               onChange={handleMonthChange}
             />
           </div>
+      <div className="bg-gray-400 h-0.5 w-full mt-0.5 mb-1"></div>
 
           {/* 날짜별 지출 기록 */}
           {expenses.map((expense) => (
             <div key={expense.date} className="border p-1 mb-2">
-              <h2 className="text-xl font-bold mb-2">{expense.date}</h2>
+              <h2 className="font-bold mb-2 italic text-lg">{expense.date}</h2>
+              <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div>
               <p>{expense.location}</p>
               <ul>
                 {expense.items.map((item, itemIndex) => (
                   <li key={itemIndex}>
-                    {item.name} {item.quantity}개 {item.price}원
+                    {/* <p>{item.name} </p> */}
+                    {/* <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div> */}
+                    <p>
+                      <span>{item.description}</span>
+                    </p>
+                      <span className="ml-30">{item.price} 원</span>
                   </li>
                 ))}
               </ul>
-              <p className="font-bold mb-4">총 지출 {expense.total}원</p>
+              {/* <p className="font-bold mb-4">지출 {expense.item.price}원</p> */}
             </div>
           ))}
 
           {/* 월 소비 금액 합산 */}
           <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4">월 소비 금액</h2>
+            <h2 className="text-xl font-bold mb-2">월 소비 금액</h2>
+          <div className="bg-gray-200 h-0.5 w-full mt-1 mb-1"></div>
             <p className="text-right">{calculateMonthlyTotal()}원</p>
           </div>
         </div>
