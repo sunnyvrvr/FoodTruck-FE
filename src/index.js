@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       { path: 'myPage/favorite', element: <Favorite /> },
       { path: 'myPage/myRegister', element: <MyRegister /> },
       { path: 'myPage/myReview', element: <MyReview /> },
-      { path: 'foodTrcuk', element: <TruckInfo /> },
+      { path: 'foodTruck/:truckId', element: <TruckInfo /> },
       { path: 'accountBook', element: <AccountBook /> },
     ],
   },
