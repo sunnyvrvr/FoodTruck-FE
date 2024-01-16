@@ -32,9 +32,6 @@ export default function Carousel({data, setCurrentLocation, setForcusingTruck, s
   return (
     <div className="w-full h-36">
       <Slider {...settings} ref={slideRef}>
-        {/* {data.forEach((tiem)=>{
-            console.log(tiem)
-        })} */}
         {data.map((item, index)=>{
         return <div className="w-screen h-36">
             <button onClick={()=>usenavigate(`foodTruck/${item.storeno}`)} className="w-full flex justify-center">

@@ -1,5 +1,5 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import Footer from "../components/Footer";
+import Footer from "../layouts/Footer";
 import { useEffect, useRef, useState } from "react";
 import SimpleInfo from '../features/Main/SimpleInfo';
 import truckMarker from '../assets/marker_truck.png';
@@ -10,6 +10,7 @@ import Serach from "../features/Main/Serach";
 import { main } from "../apis/axios";
 import Markerdesc from "../features/Main/Markerdesc";
 import { Link, useNavigate } from "react-router-dom";
+import { geocoder } from "../utils/geocoder";
 // import useKakaoLoader from "./useKakaoLoader"
 
 export default function Main() {
@@ -38,19 +39,19 @@ export default function Main() {
     input.style.display='block';
     // input.value = '';
     setCurrentAdress('')
-    setCurrentLocation({ lat:37.56383445090615, lng:126.99059423964209})
-  }
-  function handleClicked(index){
-    slideRef.current.slickGoTo(index)
+    geocoder(setCurrentLocation)
   }
 
-  if(!storeData){return <div>Loading..</div>}
+  useEffect(()=>{
+    geocoder(setCurrentLocation)
+  },[])
+
 
   return (
-    <div className="h-screen relative">
+    <div className="h-xxl relative">
 
       {/* 지도 호출 */}
-      <div className="h-xxl w-scree z-0 relative">
+      <div className="h-full w-scree z-0 relative">
         <Map 
           id='map'
           center={currentLocation}   // 지도의 중심 좌표
@@ -73,7 +74,7 @@ export default function Main() {
         {/* // 가게들 마커 */}
         {myLocation && storeData.map((marker, index) => (
         <MapMarker
-          onClick={()=>handleClicked(index)}
+          onClick={()=>{slideRef.current.slickGoTo(index)}}
           key={index}
           position={{"lat":marker.latitude, "lng":marker.longitude}}
           image={{
@@ -107,11 +108,6 @@ export default function Main() {
         </div>
       </>
       }
-
-
-
-       {/* 풋터 부분 */}
-      <Footer className='z-3 absolute bottom-0'/>
     </div>
   )
 }

@@ -5,10 +5,13 @@ module.exports = {
     extend: {
       height:{
         xxl: '92%',
-        xsl: '8%'
+        xxs: '8%'
       },
       colors:{
-        info: '#EAD196'
+        info: '#EAD196',
+        line: '#E52525',
+        background : '#FFADAD'
+
       }
     },
   },
