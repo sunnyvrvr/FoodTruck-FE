@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <div className='bg-white w-screen h-xsl'>
+    <div className='bg-white w-screen h-xxs'>
       <ul className='w-full h-full flex justify-between items-center px-8'>
         <Link to='/'>메인</Link>
         <Link to='/register'>등록</Link>
@@ -13,4 +13,3 @@ export default function Footer() {
     </div>
   )
 }
- 

@@ -1,5 +1,5 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import Footer from "../components/Footer";
+import Footer from "../layouts/Footer";
 import { useEffect, useRef, useState } from "react";
 import SimpleInfo from '../features/Main/SimpleInfo';
 import truckMarker from '../assets/marker_truck.png';
@@ -10,6 +10,7 @@ import Serach from "../features/Main/Serach";
 import { main } from "../apis/axios";
 import Markerdesc from "../features/Main/Markerdesc";
 import { Link, useNavigate } from "react-router-dom";
+import { geocoder } from "../utils/geocoder";
 // import useKakaoLoader from "./useKakaoLoader"
 
 export default function Main() {
@@ -38,10 +39,13 @@ export default function Main() {
     input.style.display='block';
     // input.value = '';
     setCurrentAdress('')
-    setCurrentLocation({ lat:37.56383445090615, lng:126.99059423964209})
+    geocoder(setCurrentLocation)
   }
 
-  if(!storeData){return <div>Loading..</div>}
+  useEffect(()=>{
+    geocoder(setCurrentLocation)
+  },[])
+
 
   return (
     <div className="h-xxl relative">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Footer from '../components/Footer';
+import Footer from '../layouts/Footer';
 import likeImage from '../assets/like.png';
 import reviewImage from '../assets/review_member.png';
 import reportImage from '../assets/report.png';

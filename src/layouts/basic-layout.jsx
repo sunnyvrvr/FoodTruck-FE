@@ -1,8 +1,7 @@
-import './App.css';
 import { Outlet } from 'react-router-dom';
-import Footer from './layouts/Footer';
+import Footer from './Footer';
 
-function App() {
+function BasicLayout() {
   return (
     <div className='h-screen'>
         <Outlet/>
@@ -11,4 +10,7 @@ function App() {
   );
 }
 
-export default App;
+export default BasicLayout;
+
+
+
