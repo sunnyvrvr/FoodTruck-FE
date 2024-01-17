@@ -12,9 +12,9 @@ export default function Register() {
     { lat:37.56383445090615, lng:126.99059423964209}
   );
 
+
   useEffect(()=>{
     console.log(registerInfo)
-    registerInfo={pre:'eh'};
     geocoder(setCurrentLocation)
   },[])
   // console.log(currentLocation)
@@ -39,7 +39,7 @@ export default function Register() {
         </Map>
       </div>
       <div className='h-xxs w-screen flex justify-center items-center'>
-        <div className='w-2/3 h-2/3' onClick={()=>navigate('info')}>
+        <div className='w-2/3 h-2/3' onClick={()=>navigate("./info", { state: { location: currentLocation } })}>
         <Button context={'이 위치로 확인'}/>
         </div>
       </div>
