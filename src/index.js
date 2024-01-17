@@ -15,6 +15,7 @@ import Search from './pages/Search';
 import BasicLayout from './layouts/basic-layout';
 import ResigterLayout from './layouts/register-layout';
 import InfoRegister from './pages/Register/InfoRegister';
+import MenuRegister from './pages/Register/MenuRegister';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,8 @@ const router = createBrowserRouter([
     element: <ResigterLayout/>,
     children:[
       {index: true, element: <Register/>},
-      {path: 'info', element: <InfoRegister/>}
+      {path: 'info', element: <InfoRegister/>},
+      {path: 'menu', element: <MenuRegister/>}
     ]
   }
   

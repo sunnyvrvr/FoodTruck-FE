@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function DOWInput({state, setState, callback}) {
 
@@ -11,19 +11,32 @@ export default function DOWInput({state, setState, callback}) {
         '토' : false,
         '일' : false
     });
+
     const days = ['월','화','수','목','금','토','일']
 
-    callback('asff')
 
     const handleClicked=(e)=>{
-        setDow()
+        const day = e.target.value
+        setDow((prev)=>({
+            ...prev,
+            [day] : !prev[day]
+        }))
     }
+    useEffect(()=>{
+        const dayOfWeek=[]
+        days.forEach((item)=>{
+            if(dow[item]){
+                dayOfWeek.push(item)
+            }
+        })
+        setState(dayOfWeek)
+    },[dow])
  
+
     return (
         <div className='w-full flex justify-evenly'> 
-
             {days.map((item)=>{
-               return  <button onClick={(e)=>handleClicked(e)} value={item} className='rounded-full border-1 border-line w-8 h-8 flex justify-center items-center text-sm font-bold'>{item}</button>
+               return  <button onClick={(e)=>handleClicked(e)} value={item} className={`rounded-full border-1 border-line w-8 h-8 flex justify-center items-center text-sm ${dow[item] && 'bg-progress'}`}>{item}</button>
             })}
         </div>
     );
