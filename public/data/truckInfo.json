@@ -1,0 +1,43 @@
+{
+    "truckData": [
+      {
+        "id": 1,
+        "name": "장한평역 3번출구 붕어빵",
+        "likes": 10,
+        "location": "서울 동대문구 천호대로 지하 405",
+        "category": "붕어빵",
+        "contact": "미입력",
+        "account": "미입력",
+        "businessDays": "평일, 토요일",
+        "menu": [
+          {"name": "팥 붕어빵", "price": 1000},
+          {"name": "슈크림 붕어빵", "price": 1000}
+        ],
+        "reviews": [
+          {"name": "이상연", "rating": 4, "comment": "붕어빵이 쫄깃하고 맛있었어요! 가격도 저렴하고 좋아요."},
+          {"name": "조흥제", "rating": 3, "comment": "팥붕어빵이 맛있어요! 하지만 너무 불친절했어요"}
+        ],
+        "averageRating": 4.5
+      },
+        {
+          "id": 2,
+          "name": "장한평역 3번출구 붕어빵",
+          "likes": 10,
+          "location": "서울 동대문구 천호대로 지하 405",
+          "category": "붕어빵",
+          "contact": "미입력",
+          "account": "미입력",
+          "businessDays": "평일, 토요일",
+          "menu": [
+            {"name": "팥 붕어빵", "price": 1000},
+            {"name": "슈크림 붕어빵", "price": 1000}
+          ],
+          "reviews": [
+            {"name": "이상연", "rating": 4, "comment": "붕어빵이 쫄깃하고 맛있었어요! 가격도 저렴하고 좋아요."},
+            {"name": "조흥제", "rating": 3, "comment": "팥붕어빵이 맛있어요! 하지만 너무 불친절했어요"}
+          ],
+          "averageRating": 4.5
+        }
+    ]
+  }
+  
