@@ -16,6 +16,7 @@ import BasicLayout from './layouts/basic-layout';
 import ResigterLayout from './layouts/register-layout';
 import InfoRegister from './pages/Register/InfoRegister';
 import MenuRegister from './pages/Register/MenuRegister';
+import MarkRegister from './pages/Register/MarkRegister';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,8 @@ const router = createBrowserRouter([
     children:[
       {index: true, element: <Register/>},
       {path: 'info', element: <InfoRegister/>},
-      {path: 'menu', element: <MenuRegister/>}
+      {path: 'menu', element: <MenuRegister/>},
+      {path: 'mark', element: <MarkRegister/>}
     ]
   }
   
