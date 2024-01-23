@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function DOWInput({state, setState, callback}) {
+export default function DOWInput({init, setState}) {
 
     const [dow,setDow]=useState({
         '월' : false,
@@ -32,6 +32,17 @@ export default function DOWInput({state, setState, callback}) {
         setState(dayOfWeek)
     },[dow])
  
+    useEffect(()=>{
+        console.log(init)
+        if(init){
+            init.forEach((item)=>{
+                setDow((prev)=>({
+                ...prev,
+                [item] : !prev[init]
+            })) 
+            })
+        }
+    },[])
 
     return (
         <div className='w-full flex justify-evenly'> 

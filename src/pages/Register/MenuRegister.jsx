@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import Progress from '../../features/Register/Progress'
@@ -7,27 +7,38 @@ import MenuPlus from '../../features/Register/MenuPlus'
 import { CiSquarePlus } from "react-icons/ci";
 
 export default function MenuRegister() {
-    const location = useLocation();
     const navigate = useNavigate();
     const [menu,setMenu] = useState([]); 
     const [menuData,setMenuData] = useState();
+    const location = JSON.parse(localStorage.getItem('location'))
+
+    useEffect(()=>{
+        const MenuList = localStorage.getItem('menu')
+        if(MenuList){
+          console.log(MenuList)
+        }
+        else{
+          localStorage.setItem('menu',JSON.stringify([]))
+        }
+    },[])
 
     function handlePlus(){
-      console.log('click')
-      setMenu(prev => [...prev, <MenuPlus key={prev.length} />]);
+      const num =menu.length
+      setMenu(prev => [...prev, <MenuPlus key={prev.length} num={prev.length} />]);
       console.log(menu)
+      console.log(num)
     }
 
     function handleSkip(){
         navigate('/register/mark')
-    }
-    function handleNext(){
-
-    }
+      }
+      function handleNext(){
+        navigate('/register/mark')
+      }
   return (
     <div className='w-screen h-xxl relative'>
     <div className='w-screen h-1/3'>
-    <RegisterMap currentLocation={location.state.location}/>
+    <RegisterMap currentLocation={location}/>
     </div>
     <div className='w-screen h-2/3  px-7'>
     
@@ -42,7 +53,7 @@ export default function MenuRegister() {
         <hr className='w-full border-1 border-black'/>
         <div>
           {menu}
-          <button setState={setMenuData} onClick={()=>{handlePlus()}} className='mt-5 w-full flex justify-center'><CiSquarePlus className='text-3xl'/></button>
+          <button onClick={()=>{handlePlus()}} className='mt-5 w-full flex justify-center'><CiSquarePlus className='text-3xl'/></button>
         </div>
       </div>
     <div className='h-xxs w-full flex '>

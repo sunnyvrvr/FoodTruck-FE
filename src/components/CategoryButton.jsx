@@ -1,8 +1,9 @@
 // src/Dropdown.js
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 const CategoryButton = ({setState}) => {
+  const dropBoxRef =useRef();
   const [select, setSelect] = useState('카테고리')
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,11 +11,28 @@ const CategoryButton = ({setState}) => {
     setIsOpen(!isOpen);
   };
 
+  
+
   const closeDropdown = (category) => {
-    console.log(setState)
+    console.log(category)
+    setState(category )
     setSelect(category)
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    // 특정 영역 외 클릭 시 발생하는 이벤트
+  function handleFocus(e) {
+      if (dropBoxRef.current && !dropBoxRef.current.contains(e.target)) {
+          // input 체크 해제
+            setIsOpen(false);
+        }
+    }
+    
+    // 이벤트 리스너에 handleFocus 함수 등록
+    document.addEventListener("mouseup", handleFocus);
+    return () => { document.removeEventListener("mouseup", handleFocus); }
+}, [dropBoxRef]);
 
 
   return (
@@ -22,7 +40,7 @@ const CategoryButton = ({setState}) => {
       <button
         onClick={toggleDropdown}
         type="button"
-        className={`${select=='카테고리' ? 'text-gray-400' : 'text-black'} w-16`}
+        className={`${select=='카테고리' ? 'text-gray-400' : 'text-black'} w-16 z-10 `}
         id="options-menu"
         aria-haspopup="true"
         aria-expanded="true"
@@ -32,7 +50,8 @@ const CategoryButton = ({setState}) => {
 
       {isOpen && (
         <div
-          className="origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          ref={dropBoxRef}
+          className="dropbox z-20 origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
