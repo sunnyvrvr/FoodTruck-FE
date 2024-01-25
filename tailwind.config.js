@@ -10,8 +10,12 @@ module.exports = {
       colors:{
         info: '#EAD196',
         line: '#E52525',
-        background : '#FFADAD'
+        background : '#FF9999',
+        progress : '#FFADAD'
 
+      },
+      borderWidth:{
+        1: '1px'
       }
     },
   },

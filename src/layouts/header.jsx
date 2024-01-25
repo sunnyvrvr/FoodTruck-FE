@@ -7,7 +7,7 @@ export default function Header({title}) {
     return (
         <div className='w-screen h-xxs flex justify-between items-center px-10'>
             <button onClick={()=>{navigate(-1)}} className='text-3xl'><CgChevronLeft/></button>
-            <div className='text-2xl'>{title}</div>
+            <div className='text-xl font-bold'>{title}</div>
             <div className='w-9'> </div>
         </div>
     );

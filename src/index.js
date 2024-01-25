@@ -15,6 +15,9 @@ import Search from './pages/Search';
 import BasicLayout from './layouts/basic-layout';
 import ResigterLayout from './layouts/register-layout';
 import InfoRegister from './pages/Register/InfoRegister';
+import MenuRegister from './pages/Register/MenuRegister';
+import MarkRegister from './pages/Register/MarkRegister';
+import Location from './pages/Mypage/Location';
 
 const router = createBrowserRouter([
   {
@@ -25,9 +28,10 @@ const router = createBrowserRouter([
       { path: '/', element: <Main /> },
       { path: '/search/:location', element: <Search /> },
       { path: 'myPage', element: <Mypage /> },
-      { path: 'myPage/favorite', element: <Favorite /> },
+      { path: 'myPage/myFavorite', element: <Favorite /> },
       { path: 'myPage/myRegister', element: <MyRegister /> },
       { path: 'myPage/myReview', element: <MyReview /> },
+      { path: 'myPage/myLocation', element: <Location /> },
       { path: 'foodTruck/:truckId', element: <TruckInfo /> },
       { path: 'accountBook', element: <AccountBook /> },
     ],
@@ -37,7 +41,9 @@ const router = createBrowserRouter([
     element: <ResigterLayout/>,
     children:[
       {index: true, element: <Register/>},
-      {path: 'info', element: <InfoRegister/>}
+      {path: 'info', element: <InfoRegister/>},
+      {path: 'menu', element: <MenuRegister/>},
+      {path: 'mark', element: <MarkRegister/>}
     ]
   }
   

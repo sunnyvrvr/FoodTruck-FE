@@ -12,9 +12,21 @@ export default function Register() {
     { lat:37.56383445090615, lng:126.99059423964209}
   );
 
+  const handleLocation = () =>{
+    const location = localStorage.getItem('location')
+    if(location){
+      console.log(location)
+      navigate("./info")
+    }
+    else{
+      localStorage.setItem('location', JSON.stringify(currentLocation))
+      navigate("./info")
+    }
+  }
+
+
   useEffect(()=>{
     console.log(registerInfo)
-    registerInfo={pre:'eh'};
     geocoder(setCurrentLocation)
   },[])
   // console.log(currentLocation)
@@ -39,7 +51,7 @@ export default function Register() {
         </Map>
       </div>
       <div className='h-xxs w-screen flex justify-center items-center'>
-        <div className='w-2/3 h-2/3' onClick={()=>navigate('info')}>
+        <div className='w-2/3 h-2/3' onClick={()=>handleLocation()}>
         <Button context={'이 위치로 확인'}/>
         </div>
       </div>
