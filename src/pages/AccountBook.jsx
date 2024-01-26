@@ -22,6 +22,14 @@ export default function AccountBook() {
     return `${year}-${month < 10 ? '0' : ''}${month}`;
   }
 
+  const formatDateString = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}`; //${year}
+  };
+
   useEffect(() => {
     fetch('data/expense.json')
       .then((res) => res.json())
@@ -36,14 +44,19 @@ export default function AccountBook() {
   }, [currentMonth]);
 
   const calculateMonthlyTotal = () => {
-    const monthlyTotal = expenses.reduce((total, expense) => total + expense.total, 0);
+    const monthlyTotal = expenses.reduce((total, expense) => { 
+      const totalForMonth = expense.items.reduce((itemTotal, item) => {
+        return itemTotal + item.price * item.quantity;
+      }, 0);
+      return total + totalForMonth;
+    }, 0);
     return monthlyTotal;
   };
 
   return (
     <div className="flex flex-col h-screen relative">
       <div className="h-92% w-screen flex-1 overflow-y-auto">
-        <div className="title text-center mt-4 text-2xl font-weight: 700 font-sans">가계부</div>
+        <div className="title text-center mt-4 text-2xl font-weight: 700">가계부</div>
       <div className="container mx-auto p-4" style={{ position: 'relative' }}>
 
           {/* 월 선택 */}
@@ -56,23 +69,24 @@ export default function AccountBook() {
               onChange={handleMonthChange}
             />
           </div>
-      <div className="bg-gray-400 h-0.5 w-full mt-0.5 mb-1"></div>
+      <div className="bg-orange-200 h-1 w-full mt-0.5 mb-1"></div>
 
           {/* 날짜별 지출 기록 */}
           {expenses.map((expense) => (
-            <div key={expense.date} className="border p-1 mb-2">
-              <h2 className="font-bold mb-2 italic text-lg">{expense.date}</h2>
+            <div key={expense.date} className=" p-1 mb-2">
+              <h2 className="mb-2 text-sm">{formatDateString(expense.date)}</h2>
               <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div>
               <p>{expense.location}</p>
               <ul>
                 {expense.items.map((item, itemIndex) => (
-                  <li key={itemIndex}>
+                  <li key={itemIndex} className="flex justify-between">
                     {/* <p>{item.name} </p> */}
                     {/* <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div> */}
                     <p>
                       <span>{item.description}</span>
                     </p>
-                      <span className="ml-30">{item.price} 원</span>
+                    <span style={{ marginTop: '10px' }}>{item.quantty} {item.price} 원</span>
+
                   </li>
                 ))}
               </ul>
@@ -82,8 +96,8 @@ export default function AccountBook() {
 
           {/* 월 소비 금액 합산 */}
           <div className="mt-8">
-            <h2 className="text-xl font-bold mb-2">월 소비 금액</h2>
-          <div className="bg-gray-200 h-0.5 w-full mt-1 mb-1"></div>
+            <h2 className="text-lg font-bold mb-2">월 소비 금액</h2>
+            <div className="bg-orange-200 h-1 w-full mt-0.5 mb-1"></div>
             <p className="text-right">{calculateMonthlyTotal()}원</p>
           </div>
         </div>
