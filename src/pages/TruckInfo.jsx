@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
+import ReviewPopup from '../components/ReviewPopup';
 import { GiCheckMark } from "react-icons/gi";
 import { AiOutlineLike } from "react-icons/ai";
 import { PiSirenLight } from "react-icons/pi";
@@ -39,6 +40,7 @@ export default function TruckInfo() {
   const { id } = useParams();
   const [truckData, setTruckData] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isReviewPopupOpen, setReviewPopupOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -105,6 +107,19 @@ export default function TruckInfo() {
       // 총 평점을 리뷰 개수로 나눠 평균 계산
       return totalRating / truckData.reviews.length;
     };
+
+    const openReviewPopup = () => {
+      setReviewPopupOpen(true);
+    };
+  
+    const closeReviewPopup = () => {
+      setReviewPopupOpen(false);
+    };
+  
+    const submitReview = (reviewData) => {
+      // 리뷰를 서버에 제출하는 로직을 추가할 수 있음
+      console.log('Submitted Review:', reviewData);
+    };  
   
   return (
     <div className="flex flex-col min-h-screen relative">
@@ -194,7 +209,9 @@ export default function TruckInfo() {
           <span className="text-black">{` ${calculateAverageRating()}`}</span>
         </p>
       </div>
-        <LuPencilLine className="text-right mr-5"/>
+        <LuPencilLine className="text-right mr-5 cursor-pointer"
+          onClick={openReviewPopup}/>
+        <ReviewPopup isOpen={isReviewPopupOpen} onClose={closeReviewPopup} onSubmit={submitReview} /> 
       </div>
       <div className="bg-gray-200 h-0.5 w-full"></div>
       <ul className="pl-8">
@@ -232,7 +249,6 @@ export default function TruckInfo() {
 
         ))}
       </ul>
-
       </div>
     {/* 푸터 높이 설정 */}
     <Footer className="z-3 absolute bottom-0 w-full h-8%" />

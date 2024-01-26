@@ -16,15 +16,15 @@ const ReviewPopup = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = () => {
     if (rating === 0) {
-        alert('평점을 클릭하세요');
-        return;
+      alert('평점을 클릭하세요');
+      return;
     }
 
-    if(reviewContent.trim() === '') {
-        alert('리뷰내용을 작성하세요');
-        return;
+    if (reviewContent.trim() === '') {
+      alert('리뷰내용을 작성하세요');
+      return;
     }
-    onSubmit({ rating, reviewContent });
+    onSubmit({ rating, reviewContent })
     onClose();
   };
 
@@ -34,6 +34,7 @@ const ReviewPopup = ({ isOpen, onClose, onSubmit }) => {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-md text-center">
             <h2 className="text-2xl font-bold mb-4">리뷰 작성</h2>
+
             <div className="flex items-center justify-center mb-4">
               <CgProfile className="w-8 h-8 text-gray-300 mr-2 cursor-pointer" />
               <p className="text-sm">{`이상연`}</p>
@@ -47,6 +48,7 @@ const ReviewPopup = ({ isOpen, onClose, onSubmit }) => {
                 />
               ))}
             </div>
+
             <textarea
               className="w-full h-20 p-2 border border-gray-300 rounded-md mb-4"
               placeholder="리뷰를 작성해주세요."
