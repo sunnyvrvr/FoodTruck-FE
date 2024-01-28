@@ -61,7 +61,7 @@ export default function InfoRegister() {
             
                 <Progress state={1}/>
 
-                <Input init={storeName} label={'상호명'} setState={setStoreName}/>
+                <Input init={storeName} label={'상호명'} setState={setStoreName} required={true}/>
                 <div className='border-b-1 border-black '>
                     <div className='font-bold'>위치</div>
                     <div className='text-gray-500'>{storeAddress}</div>
@@ -75,7 +75,7 @@ export default function InfoRegister() {
                 <button className='border-1 w-36'>종료 시간</button>
                 </div>
                 <Input init={phoneNumber} label={'연락처'} setState={setPhoneNumber}/>
-                <Input init={account} label={'계좌 번호'} setState={setAccount}/>
+                <Input init={account} label={'계좌 번호'} setState={setAccount} />
                 <div className='w-full h-12' onClick={handleSubmit}>
                     <Button context={'다음으로'}/>
                 </div>
