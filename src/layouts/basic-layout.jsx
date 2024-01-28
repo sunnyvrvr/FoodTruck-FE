@@ -4,8 +4,8 @@ import Footer from './Footer';
 function BasicLayout() {
   return (
     <div className='h-screen'>
-        <Outlet/>
-        <Footer/>
+        <Outlet className='h-xxl'/>
+        <Footer className='h-xxs'/>
     </div>
   );
 }

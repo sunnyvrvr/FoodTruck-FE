@@ -71,7 +71,7 @@ const CategoryButton = ({setState}) => {
                     <p className='text-xs'>호떡</p>
                 </div>
                 <div className="h-16 w-16 flex flex-col items-center justify-center cursor-pointer" onClick={()=>closeDropdown('와플')}>
-                  <img className='w-10 h-10' src={`${process.env.PUBLIC_URL }/assets/snack.png`} alt="" />
+                  <img className='w-10 h-10' src={`${process.env.PUBLIC_URL }/assets/waffle.png`} alt="" />
                     <p className='text-xs'>와플</p>
                 </div>
                 <div className="h-16 w-16 flex flex-col items-center justify-center cursor-pointer" onClick={()=>closeDropdown('문어빵')}>

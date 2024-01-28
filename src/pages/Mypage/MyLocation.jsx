@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Location() {
+export default function MyLocation() {
   return (
     <div>
       
