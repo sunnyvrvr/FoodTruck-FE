@@ -14,7 +14,7 @@ export default function SimpleInfo({data}) {
             </div>
             <hr className='w-11/12 border-gray-100 my-2'/>
             <div className='w-11/12 text-base mt-1'>
-                <p>{`영업시간 : ${data.storetime}`}</p>
+                <p>{`영업시간 : ${data.storetime[0]}~${data.storetime[1]}`}</p>
                 <p className='whitespace-nowrap overflow-hidden overflow-ellipsis'>{`메뉴 : ${data.menu}`}</p>
             </div>
         </div>

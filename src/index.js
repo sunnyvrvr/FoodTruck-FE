@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import Main from './pages/Main';
 import Register from './pages/Register/Register';
-import Mypage from './pages/Mypage/MyPage';
-import Favorite from './pages/Mypage/Favorite';
+import MyPage from './pages/Mypage/MyPage';
+import MyLike from './pages/Mypage/MyLike';
 import MyRegister from './pages/Mypage/MyRegister';
 import MyReview from './pages/Mypage/MyReview';
 import TruckInfo from './pages/TruckInfo';
@@ -17,7 +17,8 @@ import ResigterLayout from './layouts/register-layout';
 import InfoRegister from './pages/Register/InfoRegister';
 import MenuRegister from './pages/Register/MenuRegister';
 import MarkRegister from './pages/Register/MarkRegister';
-import Location from './pages/Mypage/Location';
+import MyLocation from './pages/Mypage/MyLocation';
+import MyPageLayout from './layouts/mypage-layout';
 
 const router = createBrowserRouter([
   {
@@ -27,11 +28,6 @@ const router = createBrowserRouter([
       { index: true, element: <Main/> },
       { path: '/', element: <Main /> },
       { path: '/search/:location', element: <Search /> },
-      { path: 'myPage', element: <Mypage /> },
-      { path: 'myPage/myFavorite', element: <Favorite /> },
-      { path: 'myPage/myRegister', element: <MyRegister /> },
-      { path: 'myPage/myReview', element: <MyReview /> },
-      { path: 'myPage/myLocation', element: <Location /> },
       { path: 'foodTruck/:truckId', element: <TruckInfo /> },
       { path: 'accountBook', element: <AccountBook /> },
     ],
@@ -44,6 +40,17 @@ const router = createBrowserRouter([
       {path: 'info', element: <InfoRegister/>},
       {path: 'menu', element: <MenuRegister/>},
       {path: 'mark', element: <MarkRegister/>}
+    ]
+  },
+  {
+    path: '/mypage',
+    element: <MyPageLayout/>,
+    children: [
+      {index: true, element: <MyPage/>},
+      {path: 'myFavorite', element: <MyLike/>},
+      {path: 'myRegister', element: <MyRegister/>},
+      {path: 'myReview', element: <MyReview/>},
+      {path: 'myLocation', element: <MyLocation/>}
     ]
   }
   

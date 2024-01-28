@@ -7,7 +7,8 @@ import currMarker from '../assets/marker_blue.png';
 
 import Carousel from "../features/Main/Carousel";
 import Serach from "../features/Main/Serach";
-import { main } from "../apis/axios";
+// import { main } from "../apis/axios";
+import { main } from "../apis/fake";
 import Markerdesc from "../features/Main/Markerdesc";
 import { Link, useNavigate } from "react-router-dom";
 import { geocoder } from "../utils/geocoder";
@@ -30,9 +31,10 @@ export default function Main() {
   useEffect(()=>{
     main(currentLocation.lat,currentLocation.lng,currentLevel)
     .then(res=>{
-      setStoreData(res.data)
+      setStoreData(res.data.stores)
     })
-  },[currentLocation,currentLevel])
+  },[])
+  
 
   function handleReset(){
     const input =document.querySelector('#searchBox');
@@ -45,6 +47,7 @@ export default function Main() {
   useEffect(()=>{
     geocoder(setCurrentLocation)
   },[])
+
 
 
   return (
