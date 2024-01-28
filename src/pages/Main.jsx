@@ -1,141 +1,116 @@
-import { Map, MapMarker } from "react-kakao-maps-sdk"
-import Footer from "../components/Footer"
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import Footer from "../layouts/Footer";
 import { useEffect, useRef, useState } from "react";
-import SimpleInfo from '../components/SimpleInfo'
-import truckMarker from '../components/assets/marker_truck.png'
-import currMarker from '../components/assets/marker_blue.png'
+import SimpleInfo from '../features/Main/SimpleInfo';
+import truckMarker from '../assets/marker_truck.png';
+import currMarker from '../assets/marker_blue.png';
 
-import Carousel from "../components/Carousel";
+import Carousel from "../features/Main/Carousel";
+import Serach from "../features/Main/Serach";
+// import { main } from "../apis/axios";
+import { main } from "../apis/fake";
+import Markerdesc from "../features/Main/Markerdesc";
+import { Link, useNavigate } from "react-router-dom";
+import { geocoder } from "../utils/geocoder";
 // import useKakaoLoader from "./useKakaoLoader"
 
 export default function Main() {
-  const [storeData, setStoreData] = useState();
-  const [clickedStore, setClickedStore] = useState();
-
-  useEffect(()=>{
-    fetch('data/foodTruck.json')
-    .then((res)=>res.json())
-    .then((res)=>setStoreData(res.stores))
-  },[])
-  
-
-  const {kakao} =window;
   const mapRef = useRef();
-  const [searchData, setSearchData] = useState();
-  const [dataList, setDataList]= useState();
+  const slideRef = useRef();
+  const [storeData, setStoreData] = useState();
   const [currentLocation, setCurrentLocation]= useState({
     lat:37.56383445090615,
     lng:126.99059423964209
   });
   const [currentAdress, setCurrentAdress]=useState();
+  const [currentLevel, setCurrentLevel]= useState(1);
+  const [myLocation, setMyLocation]= useState();
+  const [forcusingTruck, setForcusingTruck]=useState();
+
+
   useEffect(()=>{
-    const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(searchData, (data,status,_pagination)=>{
-      if(status === kakao.maps.services.Status.OK){
-        const datas=[]
-        data.forEach((item)=>{
-          const itemInfo ={address : item.address_name, name: item.place_name, location: {x:item.x, y:item.y}}
-          datas.push(itemInfo)
-        })
-        setDataList(datas)
-      }
+    main(currentLocation.lat,currentLocation.lng,currentLevel)
+    .then(res=>{
+      setStoreData(res.data.stores)
     })
-  },[searchData])
-
-  function handleSearch(item){
-    const map = mapRef.current
-    const lat = Number(item.location.y)
-    const lng = Number(item.location.x)
-    setCurrentLocation({lat: lat,lng: lng})
-    setCurrentAdress(item.address)
-    map.setLevel(2)
-    document.querySelector('#searchBox').style.display='none';
-  }
+  },[])
+  
 
   function handleReset(){
-    document.querySelector('#searchBox').style.display='block';
+    const input =document.querySelector('#searchBox');
+    input.style.display='block';
+    // input.value = '';
     setCurrentAdress('')
-    setCurrentLocation({ lat:37.56383445090615, lng:126.99059423964209})
+    geocoder(setCurrentLocation)
   }
 
-  function handleClicked(key){
-    setClickedStore(key)
-    console.log(key);
-  }
+  useEffect(()=>{
+    geocoder(setCurrentLocation)
+  },[])
+
+
+
   return (
-    <div className="h-screen relative">
-      <div className="h-xxl w-scree z-0 relative">
+    <div className="h-xxl relative">
+
+      {/* 지도 호출 */}
+      <div className="h-full w-scree z-0 relative">
         <Map 
           id='map'
           center={currentLocation}   // 지도의 중심 좌표
           style={{ width: '100%', height: '100%' }} // 지도 크기
-          level={7}      
-          ref={mapRef}                             // 지도 확대 레벨
-        >
-        {currentLocation && <MapMarker 
-        position={currentLocation} image={{src:currMarker, size: {width: 45, height: 55}}}
+          level={7}     
+          onCenterChanged={(map)=>{
+            setCurrentLevel(Math.ceil(map.getLevel()/3))
+            setCurrentLocation({
+              lat: map.getCenter().getLat(),
+              lng: map.getCenter().getLng(),
+            })
+          }} 
+          ref={mapRef}                             
+          >
+        {/* // 중심 좌표 마커 */}
+        {myLocation && <MapMarker 
+        position={myLocation} image={{src:currMarker, size: {width: 45, height: 55}}}
         />}
 
-        {storeData &&  
-        storeData.map((marker, index) => (
+        {/* // 가게들 마커 */}
+        {myLocation && storeData.map((marker, index) => (
         <MapMarker
-          onClick={()=>handleClicked(index)}
+          onClick={()=>{slideRef.current.slickGoTo(index)}}
           key={index}
-          position={marker.location}
+          position={{"lat":marker.latitude, "lng":marker.longitude}}
           image={{
             src: truckMarker,
             size: { width: 45, height: 55 }
           }}
-        >
+          clickable={true}
+          >
+        {/* // 마커 오버레이(가게 이름) */}
+        {marker.storeno === forcusingTruck ? <Markerdesc data={marker}/> : ''}
         </MapMarker>
       ))
       }
-
         </Map>
-      </div>
-      <header id='searchBox'>
-        <div className="w-screen absolute top-0 z-5  flex flex-col items-center">
-          <input 
-          className="z-3 border-2 border-black w-4/5 h-12 rounded-full mt-12 pl-5 " 
-          type="text"
-          placeholder="자신의 위치를 입력해주세요" 
-          onChange={(e)=>{setSearchData(e.target.value)}}/>
-        
-        { searchData ?
-        <div className="w-screen h-96 overflow-auto z-3">
-          <ul className="bg-white border-2 border-black bg-opacity-70 flex flex-col items-center">
-            { dataList?
-              dataList.map((item, index)=>{
-                return <li key={index} className="h-16 border-b-2 border  w-10/12 flex flex-col justify-center items-start hover:bg-black hover:bg-opacity-20" onClick={()=>{handleSearch(item)}}>
-                  <p>{item.name}</p>
-                  <p>{item.address}</p>
-                </li>
-              })
-              :
-              <li>검색 결과가 없습니다</li>
-            }
-            
-          </ul>
         </div>
-          : <></>
-        }
-        </div>
-      </header>
+
+
+      {/* 헤더 부분 */}
+      <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation} />
       
+
+
+      {/* 몸통 부분 */}
       {currentAdress &&
-      <div className="w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
-      {currentAdress}
-      </div>
+      <>
+        <div className="w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
+        {currentAdress}
+        </div>
+        <div className="absolute bottom-28 z-10 w-screen flex h-1/5 justify-center">
+          <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck} slideRef={slideRef}/>
+        </div>
+      </>
       }
-      <div className="absolute bottom-20 z-10 w-screen flex h-1/5 justify-center">
-        {currentAdress && <Carousel data={storeData}/>
-        }
-      </div>
-
-      <Footer className='z-3 absolute bottom-0'/>
-
-
     </div>
   )
 }
