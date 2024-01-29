@@ -1,9 +1,10 @@
 import React from 'react'
 import { IoHomeOutline } from "react-icons/io5";
 import { FaRegStar,FaRegBuilding } from "react-icons/fa";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Location({data, type}) {
-
+  const navigate = useNavigate();
   const handleIcon=(type)=>{
     switch (type){
       case 'home':
@@ -15,14 +16,24 @@ export default function Location({data, type}) {
     }
   }
 
+
+  const handleUpdate=()=>{
+    console.log('수정')
+    navigate(`register/:${type}`)
+  }
+
+  const handleDelete=()=>{
+
+  }
+
   const handleAddress=()=>{
    if(data.address){
     return(
-        <div>
+    <div>
       <p className='text-sm'>{`주소 :${data.address}`}</p>
       <div className='flex justify-around mt-5 '>
-        <button className='border-1 border-black rounded-2xl w-1/4'>수정</button>
-        <button className='border-1 border-black rounded-2xl w-1/4'>삭제</button>
+        <button onClick={handleUpdate} className='border-1 border-black rounded-2xl w-36'>수정</button>
+        <button className='border-1 border-black rounded-2xl w-36'>삭제</button>
       </div>
     </div>
     )
@@ -30,7 +41,7 @@ export default function Location({data, type}) {
    else{
     return(
     <div className='w-full flex justify-center mt-5'>
-    <button className='border-1 border-black rounded-xl w-1/2 '>등록해주세요</button>
+      <button className='border-1 border-black rounded-xl w-1/2 '>등록해주세요</button>
     </div>)
    }
   }

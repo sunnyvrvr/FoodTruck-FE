@@ -7,7 +7,7 @@ export default function MyButton({icon, content, link}) {
         navigate(`/mypage/${link}`)
     }
   return (
-    <button onClick={handleClicked} className='w-36 h-36 border-1 border-black shadow-lg rounded-xl flex flex-col items-center justify-center cursor-pointer'>
+    <button onClick={handleClicked} className='w-36 h-36 border-1 border-background shadow-lg rounded-xl flex flex-col items-center justify-center cursor-pointer '>
         <div>
             {icon}
         </div>

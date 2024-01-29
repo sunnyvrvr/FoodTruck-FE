@@ -9,7 +9,7 @@ import { AiOutlineLike } from "react-icons/ai";
 export default function MyPage() {
   return (
     <div className='h-xxl w-screen'>
-      <header className='flex justify-between h-xxs border-1 items-center text-xl w-full'>
+      <header className='flex justify-between h-xxs border-b-1 border-background items-center text-xl w-full'>
         <div className='w-1/3'></div>
         <div className='w-1/3 flex justify-center font-semibold'>마이 페이지</div>
         <div className='w-1/3 flex justify-center'><FaGear /></div>
@@ -25,7 +25,7 @@ export default function MyPage() {
             </div>
         </div>
 
-        <div className='h-3/5 border-1 grid grid-cols-2 grid-rows-2 justify-items-center items-center'>
+        <div className='h-3/5 border-t-1 border-background grid grid-cols-2 grid-rows-2 justify-items-center items-center'>
             <MyButton content={'나의 제보'} icon={<TbSpeakerphone className='text-5xl'/>} link={'myRegister'}/>
             <MyButton content={'내가 쓴 리뷰'} icon={<MdOutlineRateReview  className='text-5xl'/>} link={'myReview'}/>
             <MyButton content={'장소 즐겨찾기'} icon={<MdLocationPin className='text-5xl'/>} link={'myLocation'}/>
