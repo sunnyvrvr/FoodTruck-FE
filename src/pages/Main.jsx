@@ -60,14 +60,21 @@ export default function Main() {
           center={currentLocation}   // 지도의 중심 좌표
           style={{ width: '100%', height: '100%' }} // 지도 크기
           level={7}     
+          
           onCenterChanged={(map)=>{
             setCurrentLevel(Math.ceil(map.getLevel()/3))
             setCurrentLocation({
               lat: map.getCenter().getLat(),
               lng: map.getCenter().getLng(),
             })
+          }}
+          onDragEnd={()=>{
+            main(currentLocation.lat,currentLocation.lng,currentLevel)
+            .then(res=>{
+              setStoreData(res.data.stores)
+            })
           }} 
-          ref={mapRef}                             
+          ref={mapRef}            
           >
         {/* // 중심 좌표 마커 */}
         {myLocation && <MapMarker 
@@ -97,7 +104,6 @@ export default function Main() {
 
       {/* 헤더 부분 */}
       <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation} />
-      
 
 
       {/* 몸통 부분 */}

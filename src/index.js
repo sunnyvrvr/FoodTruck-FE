@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import Main from './pages/Main';
 import Register from './pages/Register/Register';
 import MyPage from './pages/Mypage/MyPage';
@@ -19,6 +18,7 @@ import MenuRegister from './pages/Register/MenuRegister';
 import MarkRegister from './pages/Register/MarkRegister';
 import MyLocation from './pages/Mypage/MyLocation';
 import MyPageLayout from './layouts/mypage-layout';
+import ReigsterLocation from './pages/Register/RegisterLocation';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +28,9 @@ const router = createBrowserRouter([
       { index: true, element: <Main/> },
       { path: '/', element: <Main /> },
       { path: '/search/:location', element: <Search /> },
+
       { path: 'foodTruck/:truckId', element: <TruckInfo /> },
+
       { path: 'accountBook', element: <AccountBook /> },
     ],
   },
@@ -50,7 +52,8 @@ const router = createBrowserRouter([
       {path: 'myFavorite', element: <MyLike/>},
       {path: 'myRegister', element: <MyRegister/>},
       {path: 'myReview', element: <MyReview/>},
-      {path: 'myLocation', element: <MyLocation/>}
+      {path: 'myLocation', element: <MyLocation/>},
+      {path: 'myLocation/register/:type', element: <ReigsterLocation/>}
     ]
   }
   

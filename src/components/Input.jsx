@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Input({init, label, setState}) {
+export default function Input({init, label, setState, required}) {
 
 
     const handleChange = (e) =>{
@@ -10,7 +10,12 @@ export default function Input({init, label, setState}) {
     return (
         <form action="" className='my-4'>
         <label htmlFor="" className='font-bold'>{label}</label>
-        <input type="text" className='w-full border-b-1 border-black' defaultValue={`${init || ''}`} placeholder={`${label}을 적어주세요`}  onBlur={(e)=>handleChange(e)}/>
+        {
+            required 
+            ?<input type="text" className='w-full border-b-1 border-black' defaultValue={`${init || ''}`} placeholder={`${label}을 적어주세요`}  onBlur={(e)=>handleChange(e)} required />
+            :<input type="text" className='w-full border-b-1 border-black' defaultValue={`${init || ''}`} placeholder={`${label}을 적어주세요`}  onBlur={(e)=>handleChange(e)} />
+        }
+
         </form>
     );
 }
