@@ -7,8 +7,8 @@ export default function ResigterLayout() {
     return (
         <TruckContextProvider>
         <div className='h-screen'>
-            <Header title={'가게 등록'}/>
-            <Outlet/>
+            <Header  title={'가게 등록'}/>
+            <Outlet />
         </div>
         </TruckContextProvider>
     );

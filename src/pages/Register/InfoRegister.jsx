@@ -8,6 +8,7 @@ import { geocoder } from '../../utils/geocoder';
 import { getAddr } from '../../utils/adressName';
 import DOWInput from '../../components/DOWInput';
 import Button from '../../components/Button';
+import Alert from '../../components/Alert';
 
 export default function InfoRegister() {
     const [location,setLocation] = useState();
@@ -18,7 +19,7 @@ export default function InfoRegister() {
     const [phoneNumber, setPhoneNumber] = useState();
     const [account, setAccount] = useState();
     const info = localStorage.getItem('infoRegister')
-
+    const [alert,setAlert] = useState(false)
 
     useEffect(() => {
         const location =JSON.parse(localStorage.getItem('location'))
@@ -47,13 +48,18 @@ export default function InfoRegister() {
             phoneNumber: phoneNumber,
             account : account
         }
-        localStorage.setItem('infoRegister',JSON.stringify(data))
-        console.log(data)
-        navigate('/register/menu')
+        if(data.storeName){
+            localStorage.setItem('infoRegister',JSON.stringify(data))
+            console.log(data)
+            navigate('/register/menu')
+        }
+        else{
+            setAlert(true)
+        }
     }
 
     return (
-        <div className='w-screen h-xxl '>
+        <div className='w-screen h-xxl relative'>
             <div className='w-screen h-1/3'>
             <RegisterMap currentLocation={JSON.parse(localStorage.getItem('location'))}/>
             </div>
@@ -80,8 +86,7 @@ export default function InfoRegister() {
                     <Button context={'다음으로'}/>
                 </div>
             </div>
-
-
+            <Alert alert={alert} setAlert={setAlert} content={['상호명이 입력되어있지 않습니다','입력해주시기 바랍니다']}/>
         </div>
     );
 }

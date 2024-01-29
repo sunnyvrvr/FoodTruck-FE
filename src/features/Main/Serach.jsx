@@ -32,13 +32,17 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,set
 
     return (
         <header id='searchBox'>
-        <div className="w-screen absolute top-0 z-5  flex flex-col items-center">
-          <input 
-          className="z-3 border-2 border-black w-4/5 h-12 rounded-full mt-12 pl-5 " 
-          type="text"
-          placeholder="자신의 위치를 입력해주세요" 
-          onChange={(e)=>{setSearchData(e.target.value)}}/>
-        
+        <div className="w-screen h-head  absolute top-0 z-5 bg-background ">
+          <div className='bg-background flex flex-col justify-between w-screen h-full'>
+            <p className='text-3xl font-bold text-white ml-3'>FoodTruck</p>
+            <div className='w-screen flex justify-center'>
+              <input 
+              className="z-3 border-2 border-black w-4/5 h-12 rounded-full pl-5" 
+              type="text"
+              placeholder="자신의 위치를 입력해주세요" 
+              onChange={(e)=>{setSearchData(e.target.value)}}/>
+            </div>
+          </div>
         { searchData ?
         <div className="w-screen h-96 overflow-auto z-3">
           <ul className="bg-white border-2 border-black bg-opacity-70 flex flex-col items-center">

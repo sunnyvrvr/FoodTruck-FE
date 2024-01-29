@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Footer from '../layouts/Footer';
 import ReviewPopup from '../components/ReviewPopup';
 import { GiCheckMark } from "react-icons/gi";
 import { AiOutlineLike } from "react-icons/ai";
@@ -21,7 +20,7 @@ export default function TruckInfo() {
   const [isReviewPopupOpen, setReviewPopupOpen] = useState(false);
 
   useEffect(()=>{
-    truckInfo(23)
+    truckInfo(id)
     .then((res)=>{
       setTruckData(res.data.truckData[0])
     })
