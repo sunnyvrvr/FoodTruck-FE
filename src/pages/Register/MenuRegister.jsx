@@ -46,9 +46,9 @@ export default function MenuRegister() {
         <Progress state={2}/>
 
         <div className='flex justify-around pb-4'>
-          <p className='w-16 flex justify-center'>카테고리</p>
           <p className='w-16 flex justify-center'>메뉴명</p>
           <p className='w-16 flex justify-center'>가격</p>
+          <p className='w-16 flex justify-center'>설명</p>
         </div>
         <hr className='w-full border-1 border-black'/>
         <div>

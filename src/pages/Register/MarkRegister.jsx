@@ -55,6 +55,7 @@ export default function MarkRegister() {
       ans['menu'] = local1
       ans['confirm'] = confirm
 
+      console.log(ans)
       // register(ans)
       // .then((res)=>{console.log(res)})
 
@@ -80,7 +81,8 @@ export default function MarkRegister() {
 
         <p>사진 업로드</p>
         <div className='w-11/12 border-1 h-2/5 bg-gray-300 flex justify-center items-center'>
-          <input type="file" onChange={handleChange} />
+          <label className='bg-white w-24 flex justify-center h-10 items-center rounded-xl border-1 border-background' htmlFor='inputFile'>등록하기</label>
+          <input id='inputFile' type="file" onChange={handleChange} className='hidden'/>
         </div>
       </div>
     <div className='h-xxs w-full flex '>

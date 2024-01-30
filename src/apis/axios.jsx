@@ -6,7 +6,8 @@ const api = axios.create({
 })
 
 export function main(lat,lng,level){
-  return api.get(`/calculate/${lat}/${lng}/${level}`)
+  // return api.get(`/calculate?latitude=${lat}&longitude=${lng}?distance=${level}`)
+  return api.get(`/calculate?latitude=${lat}&longitude=${lng}&distance=${level}`)
 }
 
 export function register(data){
