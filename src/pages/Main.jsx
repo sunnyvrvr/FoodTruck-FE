@@ -8,7 +8,7 @@ import currMarker from '../assets/marker_blue.png';
 import Carousel from "../features/Main/Carousel";
 import Serach from "../features/Main/Serach";
 // import { main } from "../apis/axios";
-import { main } from "../apis/fake";
+import { main } from "../apis/axios";
 import Markerdesc from "../features/Main/Markerdesc";
 import { Link, useNavigate } from "react-router-dom";
 import { geocoder } from "../utils/geocoder";
@@ -29,12 +29,20 @@ export default function Main() {
 
 
   useEffect(()=>{
+    handleMainData()
+  },[currentAdress])
+  
+  useEffect(()=>{
+    console.log(storeData)
+  },[storeData])
+
+  const handleMainData = () =>{
     main(currentLocation.lat,currentLocation.lng,currentLevel)
     .then(res=>{
-      setStoreData(res.data.stores)
+      console.log(res)
+      setStoreData(res.data)
     })
-  },[])
-  
+  }
 
   function handleReset(){
     const input =document.querySelector('#searchBox');
@@ -68,12 +76,7 @@ export default function Main() {
               lng: map.getCenter().getLng(),
             })
           }}
-          onDragEnd={()=>{
-            main(currentLocation.lat,currentLocation.lng,currentLevel)
-            .then(res=>{
-              setStoreData(res.data.stores)
-            })
-          }} 
+          onDragEnd={()=>{handleMainData()}} 
           ref={mapRef}            
           >
         {/* // 중심 좌표 마커 */}
@@ -82,7 +85,7 @@ export default function Main() {
         />}
 
         {/* // 가게들 마커 */}
-        {myLocation && storeData.map((marker, index) => (
+        {storeData && storeData.map((marker, index) => (
         <MapMarker
           onClick={()=>{slideRef.current.slickGoTo(index)}}
           key={index}

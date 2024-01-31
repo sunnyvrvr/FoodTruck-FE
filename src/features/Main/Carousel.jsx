@@ -32,7 +32,7 @@ export default function Carousel({data, setCurrentLocation, setForcusingTruck, s
   return (
     <div className="w-full h-36">
       <Slider {...settings} ref={slideRef}>
-        {data.map((item, index)=>{
+        {data && data.map((item, index)=>{
         return <div className="w-screen h-36">
             <button onClick={()=>usenavigate(`foodTruck/${item.storeno}`)} className="w-full flex justify-center">
           <SimpleInfo  index={index} data={item} className=" w-11/12 h-36"/>
