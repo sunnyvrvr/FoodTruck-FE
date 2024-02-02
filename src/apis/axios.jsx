@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 
 const api = axios.create({
-  baseURL:'http://localhost:5000'
+  baseURL:'http://www.yummytruck.store'
 })
 
 export function main(lat,lng,level){
@@ -17,8 +17,8 @@ export function register(data){
 }
 
 //푸드트럭 상세페이지 API
-export function truckData(id){
-  return api.get(`/truck/detail/${id}`)
+export function truckData(storeno){
+  return api.get(`/truck/detail/${storeno}`)
 }
 
 export function truckReview(id, storeno, storecontent, storerate){
@@ -52,7 +52,6 @@ export function inputAccount(id, menu){
 }
 
 //가계부
-
 export function accountData(id){
   return api.get(`/account/${id}`)
 }
