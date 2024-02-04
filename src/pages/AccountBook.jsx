@@ -48,6 +48,7 @@ export default function AccountBook() {
             <div key={purchaseItem.date} className="p-1 mb-2 w-full">
               <h2 className="mb-2 text-sm">{formatDateString(purchaseItem.date)}</h2>
               <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div>
+
               <p>{purchaseItem.storename}</p>
               <ul>
                 <li key={purchaseItem.date} className="flex justify-between">
@@ -57,6 +58,7 @@ export default function AccountBook() {
                   <span style={{ marginTop: '10px' }}>{purchaseItem.itemquantity} {purchaseItem.itempricesum} 원</span>
                 </li>
               </ul>
+              {/* <p className="font-bold mb-4">지출 {expense.item.price}원</p> */}
             </div>
           ))}
 
