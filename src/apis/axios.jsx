@@ -2,8 +2,8 @@ import axios from 'axios'
 import React from 'react'
 
 const api = axios.create({
-  baseURL:'https://www.yummytruck.store'
-  // baseURL:'http://localhost:4000/'
+  // baseURL:'https://www.yummytruck.store'
+  baseURL:'http://localhost:4000/'
 })
 
 export function main(lat,lng,level){
@@ -110,5 +110,14 @@ export function myPageUpdage(id, lat, lng, type){
 export function myPageNickName(id, name){
   return api.put(`/memberUpdage?id=${id}`,{
     name : name
+  })
+}
+
+export function Login(code){
+  return api.get(`/auth/kakao/callback?code=${code}`,{
+    headers:{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
   })
 }

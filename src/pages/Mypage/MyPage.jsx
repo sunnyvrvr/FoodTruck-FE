@@ -30,8 +30,8 @@ export default function MyPage() {
             <MyButton content={'내가 쓴 리뷰'} icon={<MdOutlineRateReview  className='text-5xl'/>} link={'myReview'}/>
             <MyButton content={'장소 즐겨찾기'} icon={<MdLocationPin className='text-5xl'/>} link={'myLocation'}/>
             <MyButton content={'좋아요 누른 가게'} icon={<AiOutlineLike className='text-5xl'/>} link={'myFavorite'}/>
-            <a href={`https://kauth.kakao.com/oauth/authorize?client_id=6f058c86db21168b8e6606ff565b4574&redirect_uri=https://www.yummytruck.store/auth/kakao/callback&response_type=code`}>로그인</a>
-            {/* <a href={`https://kauth.kakao.com/oauth/authorize?client_id=6f058c86db21168b8e6606ff565b4574&redirect_uri=http://localhost:4000/auth/kakao/callback&response_type=code`}>로그인</a> */}
+            {/* <a href={`https://kauth.kakao.com/oauth/authorize?client_id=6f058c86db21168b8e6606ff565b4574&redirect_uri=https://www.yummytruck.store/auth/kakao/callback&response_type=code`}>로그인</a> */}
+            <a href={`https://kauth.kakao.com/oauth/authorize?client_id=6f058c86db21168b8e6606ff565b4574&redirect_uri=https://www.yummytruck.shop/auth/kakao/callback&response_type=code`}>로그인</a>
             </div>
       </div>
     </div>

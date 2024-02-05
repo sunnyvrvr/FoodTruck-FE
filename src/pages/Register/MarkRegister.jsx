@@ -76,9 +76,6 @@ export default function MarkRegister() {
         createMenuData(store_id)
       })
 
-      // register(ans)
-      // .then((res)=>{console.log(res)})
-
       localStorage.removeItem('menu')
       localStorage.removeItem('location')
       localStorage.removeItem('infoRegister')
