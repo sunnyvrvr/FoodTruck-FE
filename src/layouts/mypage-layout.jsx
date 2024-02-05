@@ -7,7 +7,7 @@ import Footer from './Footer';
 export default function MyPageLayout() {
     return (
         <TruckContextProvider>
-        <div className='h-screen'>
+        <div className='h-dvh'>
             <div className='h-xxl'>
             <Outlet/>
             </div>

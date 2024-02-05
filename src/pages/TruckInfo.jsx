@@ -87,7 +87,7 @@ export default function TruckInfo() {
     };  
   
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-dvh relative">
       <div className="w-screen h-xxl flex-1 overflow-y-auto">
           { truckData.photo && (
             <img
