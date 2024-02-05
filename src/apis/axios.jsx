@@ -2,8 +2,8 @@ import axios from 'axios'
 import React from 'react'
 
 const api = axios.create({
-  // baseURL:'https://www.yummytruck.store'
-  baseURL:'http://localhost:4000/'
+  baseURL:'https://www.yummytruck.store'
+  // baseURL:'http://localhost:4000/'
 })
 
 export function main(lat,lng,level){
