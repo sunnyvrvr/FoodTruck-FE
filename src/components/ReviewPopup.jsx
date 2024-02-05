@@ -45,7 +45,7 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
 
             <div className="flex items-center justify-center mb-4">
               <CgProfile className="w-8 h-8 text-gray-300 mr-2 cursor-pointer" />
-              <p className="text-sm">{`이상연`}</p>
+              <p className="text-sm">{`${id}`}</p> 
             </div>
             <div className="flex items-center justify-center mb-4">
               {[...Array(5)].map((_, i) => (

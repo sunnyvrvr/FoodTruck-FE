@@ -8,19 +8,23 @@ import { BsCart4 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { LuPencilLine } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
-import { truckData as fetchTruckData } from '../apis/axios';
+import { truckData as AxiosTruckData } from '../apis/axios';
 import { truckReview } from '../apis/axios';
 import { truckComplain } from '../apis/axios';
 import { truckGood } from '../apis/axios';
 import { inputAccount } from '../apis/axios';
+import { accountData } from '../apis/axios';
 
-// import { purchaseData } from '../apis/axios';
 import { Alert } from '../components/Alert';
+import { CategoryImg } from '../utils/categoryImg';
 import * as axiosApi from '../apis/axios'; 
 
 export default function TruckInfo() {
-  const [truckData, setTruckData] = useState({ menu: []});
-  const [purchaseData, setPurchaseData] = useState(null);
+  const [truckData, setTruckData] = useState({ menu: [], review: []});
+  const [accountData, setAccountData] = useState(null);
+  const [liked, setLiked] = useState(null);
+  const [complained, setComplianed] = useState(null);
+  
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isReviewPopupOpen, setReviewPopupOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -30,9 +34,9 @@ export default function TruckInfo() {
   const id ='b04f6ff6-22b3-48c8-b6f9-7a8468cf9099';
 
   useEffect(() => {
-    const fetchData = async () => {
+    const AxiosData = async () => {
       try {
-        const response = await fetchTruckData(storeno);
+        const response = await AxiosTruckData(storeno);
         if (response.data.truckData && response.data.truckData.length > 0) {
           setTruckData(response.data.truckData[0]);
         } else {
@@ -44,7 +48,7 @@ export default function TruckInfo() {
         setLoading(false);
       }
     };
-    fetchData();
+    AxiosData();
   }, [storeno]);
 
   
@@ -85,30 +89,24 @@ export default function TruckInfo() {
     //리뷰 팝업 열기- 닫기
     const openReviewPopup = () => {
       setReviewPopupOpen(true);
-    };
-  
+    }; 
     const closeReviewPopup = () => {
       setReviewPopupOpen(false);
     };
   
-    const submitReview = (reviewData) => {
-      // 리뷰를 서버에 제출하는 로직을 추가할 수 있음 (x)
-      
-      console.log('Submitted Review:', reviewData);
-    };  
-  
-    const handleClicked = ()=> {
-      truckData('b04f6ff6-22b3-48c8-b6f9-7a8468cf9099', truckData.storeno)
+    //가계부 추가 
+    const handleInputAccount = ()=> {
+      inputAccount(id, accountData.menu)
       .then((res)=>{
         if (res.status) {
-          truckData(truckData.storeno)
-            .then((res) => setTruckData(res))
+          accountData(id)
+            .then((res) => setAccountData(res))
             .catch((error) => {
               console.errror('트럭 상세페이지 데이터 에러 발생:', error);
             })
         }
-        purchaseData(purchaseData.id)
-        .then((res)=>setPurchaseData(res))
+        accountData(accountData.id)
+        .then((res)=>setAccountData(res))
       })
       .catch((error) => {
         console.error('가계부 페이지 이동 에러:', error);
@@ -119,18 +117,12 @@ export default function TruckInfo() {
 
     const handleLiked = () => {
       truckGood(id, truckData.storeno)
-      .then((res)=>
-       truckData(truckData.storeno)
-        .then((res)=>setTruckData(res.data))
-      )
+    
     }
     
     const handleComplain = () => {
       truckComplain(id, truckData.storeno)
-      .then((res)=>{
-        truckData(truckData.storeno)
-        .then((res)=>setTruckData(res.data))
-      })
+
     }
 
   return (
@@ -207,15 +199,17 @@ export default function TruckInfo() {
               </>
             )}
 
-            <div onClick={handleClicked} className="w-full h-full absolute top-0 left-0" />
-              {/* <img src={item.image} alt={item.name} className="w-24 h-24 rounded-full mr-4 border-2" />  */}
+            <div onClick={handleInputAccount} className="w-full h-full absolute top-0 left-0" />
+              <div className="w-24 h-24 rounded-full mr-4 border-2">
+                {CategoryImg(item.category)}
+              </div>
               <div>
                 <p className ="font-semibold text-lg mb-0.5">{item.name}</p>
                 <p className ="text-slate-600 text-sm mb-0.2">{item.descrption}</p>
                 <p className ="text-slate-950 text-base mt-0.2">{item.price} 원</p>
               </div>
               <span
-                onClick={() => handleAddToAccount(index)}
+//                onClick={() => handleAddToAccount(index)}
                 className={`ml-auto cursor-pointer w-5 h-5 transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`}
               >
               </span>
