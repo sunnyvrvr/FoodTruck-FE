@@ -19,7 +19,7 @@ import { Alert } from '../components/Alert';
 import * as axiosApi from '../apis/axios'; 
 
 export default function TruckInfo() {
-  const [truckData, setTruckData] = useState(null);
+  const [truckData, setTruckData] = useState({ menu: []});
   const [purchaseData, setPurchaseData] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isReviewPopupOpen, setReviewPopupOpen] = useState(false);
@@ -74,11 +74,11 @@ export default function TruckInfo() {
 
     // 리뷰의 평균 평점
     const calculateAverageRating = () => {
-      if (!truckData || !truckData.reviews || truckData.reviews.length === 0) {
+      if (!truckData || !truckData.review || truckData.review.length === 0) {
         return "리뷰없음";
       }
-      const totalRating = truckData.reviews.reduce((sum, review) => sum + review.rating, 0);
-      return totalRating / truckData.reviews.length;
+      const totalRating = truckData.review.reduce((sum, review) => sum + review.rating, 0);
+      return totalRating / truckData.review.length;
     };
     //리뷰 팝업 열기- 닫기
     const openReviewPopup = () => {
@@ -189,6 +189,9 @@ export default function TruckInfo() {
         </div>
       <div className="bg-gray-200 h-0.5 w-full mt-1 mb-1"></div>
 
+      {!truckData.menu || truckData.menu.length === 0 ? (
+        <p className="ml-8 mt-2 text-slate-600">메뉴 등록이 안된 상태입니다</p>
+      ) : (
       <ul>
       {truckData.menu.map((item, index) => (
         <div key={index}>
@@ -221,7 +224,8 @@ export default function TruckInfo() {
             <div className="bg-gray-100 h-0.5 w-full"></div> {/* 하단 회색 줄 */}
           </div>
         ))}
-      </ul>   
+      </ul>  
+      )} 
 
       {/* 리뷰 */}
       <div className="bg-orange-200 h-1 w-full"></div>
@@ -272,7 +276,7 @@ export default function TruckInfo() {
             </li>
           ))
         ) : (
-          <p>리뷰가 없습니다.</p>
+          <p className="text-center text-gray-300">리뷰가 없습니다.</p>
         )}
       </ul>
 
