@@ -27,7 +27,7 @@ export default function TruckInfo() {
   const navigate = useNavigate();
   const { storeno } = useParams();
   // const { id } = useParams(); //로그인 기능 구현 후 변경
-  const id ='d41a74e1-985a-43d8-92c9-67ab2c7d7e9f';
+  const id ='b04f6ff6-22b3-48c8-b6f9-7a8468cf9099';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +46,7 @@ export default function TruckInfo() {
     };
     fetchData();
   }, [storeno]);
+
   
   if (loading) {
     return <div>Loading...</div>;
@@ -55,9 +56,10 @@ export default function TruckInfo() {
   console.log('truckData:', truckData); // truckData 값이 어떻게 변경되는지 확인
 
   // 메뉴 - 가계부추가 (x)
-  const handleAddToMenu = (index) => {
-    console.log(`Add to menu: ${truckData.menu[index].name}`);
-    setHoveredIndex(index);
+  const handleAddToAccount = (index) => {
+    navigate('/accountBook');
+    // console.log(`Add to menu: ${truckData.menu[index].name}`);
+    // setHoveredIndex(index);
   };
   //호버 - 검은색 표시
   const handleHoverMenu = (index) => {
@@ -91,11 +93,12 @@ export default function TruckInfo() {
   
     const submitReview = (reviewData) => {
       // 리뷰를 서버에 제출하는 로직을 추가할 수 있음 (x)
+      
       console.log('Submitted Review:', reviewData);
     };  
   
     const handleClicked = ()=> {
-      truckData('d41a74e1-985a-43d8-92c9-67ab2c7d7e9f', truckData.storeno)
+      truckData('b04f6ff6-22b3-48c8-b6f9-7a8468cf9099', truckData.storeno)
       .then((res)=>{
         if (res.status) {
           truckData(truckData.storeno)
@@ -115,22 +118,18 @@ export default function TruckInfo() {
     }
 
     const handleLiked = () => {
-      truckData('d41a74e1-985a-43d8-92c9-67ab2c7d7e9f', truckData.storeno)
-      .then((res)=>{
-        if (res.status){
-          truckData(truckData.storeno)
-          .then((res)=>setTruckData(res))
-        }
-      })
+      truckGood(id, truckData.storeno)
+      .then((res)=>
+       truckData(truckData.storeno)
+        .then((res)=>setTruckData(res.data))
+      )
     }
     
     const handleComplain = () => {
-      truckData('d41a74e1-985a-43d8-92c9-67ab2c7d7e9f', truckData.storeno)
+      truckComplain(id, truckData.storeno)
       .then((res)=>{
-        if (res.status){
-          truckData(truckData.storeno)
-          .then((res)=>setTruckData(res))
-        }
+        truckData(truckData.storeno)
+        .then((res)=>setTruckData(res.data))
       })
     }
 
@@ -190,7 +189,7 @@ export default function TruckInfo() {
       <div className="bg-gray-200 h-0.5 w-full mt-1 mb-1"></div>
 
       {!truckData.menu || truckData.menu.length === 0 ? (
-        <p className="ml-8 mt-2 text-slate-600">메뉴 등록이 안된 상태입니다</p>
+        <p className="ml-8 mt-2 text-gray-400 text-center mb-2">메뉴 등록이 안된 상태입니다</p>
       ) : (
       <ul>
       {truckData.menu.map((item, index) => (
@@ -216,7 +215,7 @@ export default function TruckInfo() {
                 <p className ="text-slate-950 text-base mt-0.2">{item.price} 원</p>
               </div>
               <span
-                onClick={() => handleAddToMenu(index)}
+                onClick={() => handleAddToAccount(index)}
                 className={`ml-auto cursor-pointer w-5 h-5 transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`}
               >
               </span>
@@ -238,8 +237,9 @@ export default function TruckInfo() {
         </p>
       </div>
         <LuPencilLine className="text-right mr-5 cursor-pointer"
-          onClick={openReviewPopup}/>
-        <ReviewPopup isOpen={isReviewPopupOpen} onClose={closeReviewPopup} onSubmit={submitReview} /> 
+          onClick={openReviewPopup}
+        />
+        <ReviewPopup isOpen={isReviewPopupOpen} onClose={closeReviewPopup} data={truckData} PId={id} setTruckData={setTruckData} /> 
       </div>
       <div className="bg-gray-200 h-0.5 w-full"></div>
 
@@ -276,7 +276,13 @@ export default function TruckInfo() {
             </li>
           ))
         ) : (
-          <p className="text-center text-gray-300">리뷰가 없습니다.</p>
+          // 리뷰없음
+          <div className="text-center text-gray-400 mt-4 mb-2">
+            <p>리뷰가 없습니다</p>
+            <div className="mb-2 ml-8">
+
+            </div>
+          </div>
         )}
       </ul>
 

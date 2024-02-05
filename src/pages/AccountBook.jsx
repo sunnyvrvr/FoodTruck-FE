@@ -5,7 +5,7 @@ import { accountData } from '../apis/axios';
 
 export default function AccountBook() {
   const [purchaseData, setPurchaseData] = useState([]);
-  const id = 'd41a74e1-985a-43d8-92c9-67ab2c7d7e9f'; // 실제 사용자 ID로 대체
+  const id = 'd41a74e1-985a-43d8-92c9-67ab2c7d7e9f'; // 로그인 기능구현 이후 코드변경
 
   useEffect(() => {
     accountData(id)
@@ -35,6 +35,16 @@ export default function AccountBook() {
     }, 0);
     return totalSum;
   };
+  
+  //수량 증가 버튼
+  const handleIncreaseQuantity = () => {}
+
+  //수량 감소 버튼
+  const handleDecreaseQuantity =() => {}
+  //수량 수정 버튼
+  const handleEditItem = () =>{}
+  //내역 삭제 버튼 
+  const handleDeleteItem =() => {}
 
   return (
     <div className="flex flex-col h-xxl relative w-full">
@@ -55,7 +65,25 @@ export default function AccountBook() {
                   <p>
                     <span>{purchaseItem.iteminformation}</span>
                   </p>
-                  <span style={{ marginTop: '10px' }}>{purchaseItem.itemquantity} {purchaseItem.itempricesum} 원</span>
+                  <span style={{ marginTop: '10px', display: 'inlineblock' }}>
+                    <div>{purchaseItem.itemquantity}</div>
+                    <div>{purchaseItem.itempricesum} 원</div>
+                      <button onClick={() => handleIncreaseQuantity(purchaseItem.index)}
+                        style={{
+                          backgroundColor: 'bg-slate-300',
+                          border: '1px solid #ccc',
+                          padding: '5px 10px',
+                          borderRadius: '3px',
+                          marginRight: '5px',
+                          cursor: 'pointer',
+
+                        }}
+                        >
+                        +</button>
+                      <button onClick={() => handleDecreaseQuantity(purchaseItem.index)}>-</button>
+                      <button onClick={() => handleEditItem(purchaseItem.index)}>수정</button>
+                      <button onClick={() => handleDeleteItem(purchaseItem.index)}>삭제</button>
+                  </span>
                 </li>
               </ul>
               {/* <p className="font-bold mb-4">지출 {expense.item.price}원</p> */}
@@ -68,8 +96,11 @@ export default function AccountBook() {
           <div className="mt-8 w-full">
             <h2 className="text-lg font-bold mb-2"> 소비 금액</h2>
             <div className="bg-orange-200 h-1 w-full mt-0.5 mb-1"></div>
-            <h2 className="text-right">{calculateTotalSum()} 원</h2>
+            <div className="text-right mb-1">
+              {calculateTotalSum()} 원
+            </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CgProfile } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
+import { truckReview, truckData } from '../apis/axios';
 
-const ReviewPopup = ({ isOpen, onClose, onSubmit }) => {
+const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
   const [reviewContent, setReviewComment] = useState('');
+  const [truckData, setTruckData]=useState('')
   const [rating, setRating] = useState(0);
+  const id = PId
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -24,9 +27,14 @@ const ReviewPopup = ({ isOpen, onClose, onSubmit }) => {
       alert('리뷰내용을 작성하세요');
       return;
     }
-    onSubmit({ rating, reviewContent })
+    truckReview(id, truckData.storeno, reviewContent, rating)
+
     onClose();
   };
+
+  useEffect(()=>{
+    setTruckData(data)
+  },[])
 
   return (
     <>
