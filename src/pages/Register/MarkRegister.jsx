@@ -17,6 +17,7 @@ export default function MarkRegister() {
     const location = JSON.parse(localStorage.getItem('location'))
     const menu =  JSON.parse(localStorage.getItem('menu'))
     const info =  JSON.parse(localStorage.getItem('infoRegister'))
+    const user = JSON.parse(localStorage.getItem('userId'))
 
 
     const handleChange=(e)=>{
@@ -67,6 +68,7 @@ export default function MarkRegister() {
       infoData['location'] = info.storeAddress
       infoData['confirmed'] = confirm
       infoData['reportcount'] = 0
+      infoData['id']=user.id
 
 
 
@@ -96,6 +98,7 @@ export default function MarkRegister() {
         menuData['itemname']=item.menuName
         menuData['itemname']=item.menuName
         menuData['storeid']=store_id
+        menuData['id']=user.id
       })
       menuRegister(menuData)
       
