@@ -79,10 +79,7 @@ export default function MarkRegister() {
         createMenuData(store_id)
       })
 
-      localStorage.removeItem('menu')
-      localStorage.removeItem('location')
-      localStorage.removeItem('infoRegister')
-      navigate('/')
+
     }
     useEffect(()=>{
       console.log(info)
@@ -104,6 +101,12 @@ export default function MarkRegister() {
       })
       console.log(menuData)
       menuRegister(menuData)
+      .then((res)=>{
+        localStorage.removeItem('menu')
+        localStorage.removeItem('location')
+        localStorage.removeItem('infoRegister')
+        navigate('/')
+      })
       
     }
 
