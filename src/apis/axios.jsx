@@ -5,8 +5,8 @@ const user = JSON.parse(localStorage.getItem('userId'));
 const userId = user?.id
 
 const api = axios.create({
-  baseURL:'https://www.yummytruck.store'
-  // baseURL:'http://localhost:5000/'
+baseURL:'http://www.yummytruck.store'
+//  baseURL: 'http://localhost:5000'
 })
 
 export function main(lat,lng,level){
@@ -26,8 +26,8 @@ export function menuRegister(data){
 }
 
 //푸드트럭 상세페이지 API
-export function truckData(id){
-  return api.get(`/truck/detail/${id}`)
+export function truckData(storeno){
+  return api.get(`/truck/detail/${storeno}`)
 }
 
 export function truckReview(id, storeno, storecontent, storerate){
@@ -61,7 +61,6 @@ export function inputAccount(id, menu){
 }
 
 //가계부
-
 export function accountData(id){
   return api.get(`/account/${userId}`)
 }
@@ -79,9 +78,7 @@ export function accountDelete(id,date,menu){
   return api.delete(`account/delete?id=${userId}&date=${date}&menu=${menu}`)
 }
 
-
 //마이페이지
-
 export function myPageData(id){
   return api.get(`/member?id=${userId}`)
 }
