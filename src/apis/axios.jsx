@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 
 const api = axios.create({
-  baseURL:'http://www.yummytruck.store'
+baseURL:'http://www.yummytruck.store'
 //  baseURL: 'http://localhost:5000'
 })
 
@@ -11,9 +11,14 @@ export function main(lat,lng,level){
   return api.get(`/calculate?latitude=${lat}&longitude=${lng}&distance=${level}`)
 }
 
-export function register(data){
+export function infoRegister(data){
   return api.post('/storeRegister',{
-    register: data
+    data: data
+  })
+}
+export function menuRegister(data){
+  return api.post('/itemRegister',{
+    data: data
   })
 }
 
@@ -102,5 +107,14 @@ export function myPageUpdage(id, lat, lng, type){
 export function myPageNickName(id, name){
   return api.put(`/memberUpdage?id=${id}`,{
     name : name
+  })
+}
+
+export function Login(code){
+  return api.get(`/auth/kakao/callback?code=${code}`,{
+    headers:{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
   })
 }
