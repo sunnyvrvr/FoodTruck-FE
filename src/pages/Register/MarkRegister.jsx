@@ -52,18 +52,22 @@ export default function MarkRegister() {
       const infoData = {}
       const days = info.dayOfWeek;
       const storeWeek = days.join('');
+      let payment =''
       console.log(storeWeek)
 
+      if (info.payMent['cash']){payment+='/현금/'}
+      if (info.payMent['card']){payment+='카드/'}
+      if (info.payMent['account']){payment+='계좌/'}
 
-      
 
+      console.log(payment)
       infoData['storename'] = info.storeName
       infoData['storetime'] = `${info.startTime}-${info.endTime}`
       infoData['category'] = info.category
       infoData['storeweek'] = storeWeek
       infoData['contact'] = info.phoneNumber
       infoData['account'] = info.account
-      infoData['payment'] = info.payMent
+      infoData['payment'] = payment
       infoData['latitude'] = location.lat
       infoData['longitude'] = location.lng
       infoData['location'] = info.storeAddress
