@@ -14,6 +14,7 @@ import { truckComplain } from '../apis/axios';
 import { truckGood } from '../apis/axios';
 import { inputAccount } from '../apis/axios';
 import { accountData } from '../apis/axios';
+import { CgChevronLeft } from "react-icons/cg";
 
 import { Alert } from '../components/Alert';
 import { CategoryImg } from '../utils/categoryImg';
@@ -133,19 +134,24 @@ export default function TruckInfo() {
 
   return (
     <div className="flex flex-col min-h-screen relative">
-      <Header title={'상세 페이지'}/>
+      <div className='w-screen h-16 flex justify-between items-center px-10 border-b-1 '>
+            <button onClick={()=>{navigate(-1)}} className='text-3xl'><CgChevronLeft/></button>
+            <div className='text-xl font-bold'>상세 페이지</div>
+            <div className='w-9'> </div>
+        </div>
       {loading || !truckData? (
         <p>Loading... </p>
       ) : (
       <div className="w-screen h-xxl flex-1 overflow-y-auto">
         {/* 트럭 사진 렌더링 */}
-        { truckData && truckData.photo && (
+        <div className='flex justify-center w-screen'>
           <img
           src={`${process.env.PUBLIC_URL}/assets/foodTruck.jpg`}
           alt="Truck Photo"
-          className='w-screen border-b-2 aspect-[3/2]'
+          className='w-screen border-b-2 aspect-[2/1] xl:w-1/3'
           />
-        )}
+        </div>
+        
           
         {/* 트럭 이름 */}
         <h3 className="text-2xl font-bold mt-4 mb-2 ml-5">{truckData?.storename}</h3>
