@@ -13,7 +13,11 @@ export default function LoginHandle() {
         const queryParams = new URLSearchParams(location.search);
         const code = queryParams.get('code');
         Login(code)
-        .then((res)=>console.log(res))
+        .then((res)=>{
+          console.log('성공')
+          localStorage.setItem('userId',JSON.stringify(res.data))
+          navigate('/')
+        })
         .catch((error)=>console.error(error))
       }, []);
 

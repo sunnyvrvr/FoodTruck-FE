@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,setMyLocation}) {
     const [searchData, setSearchData] = useState();
     const [dataList, setDataList]= useState();
     const {kakao} =window;
+    const userId = JSON.parse(localStorage.getItem('userId'));
+    const URL = process.env.REACT_APP_KAKAO_URL
+
     useEffect(()=>{
         const ps = new kakao.maps.services.Places();
     
@@ -19,6 +23,7 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,set
         })
       },[searchData])
 
+
       function handleSearch(item){
         const map = mapRef.current
         const lat = Number(item.location.y)
@@ -32,8 +37,9 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,set
 
     return (
         <header id='searchBox' className='absolute top-0 z-10 h-full'>
-        <div className="w-screen h-xxs bg-background flex items-center">
+        <div className="w-screen h-xxs bg-background flex items-center justify-between">
             <p className='text-3xl font-bold text-white ml-3'>FoodTruck</p>
+            <Link to={userId ? '/mypage' : URL} className='w-auto px-5 bg-white font-bold text-background rounded-2xl border-1 flex justify-center mr-5 mt-2' >{userId ? userId.nickname : '로그인'}</Link>
         </div>
 
             <div className='w-screen flex justify-center mt-10'>
