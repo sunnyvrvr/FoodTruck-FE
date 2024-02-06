@@ -119,18 +119,20 @@ export default function TruckInfo() {
 
     const handleLiked = () => {
 
-      truckGood(id, AxiosTruckData.storeno)
+      truckGood(id, truckData.storeno)
         .then((res) => {
           AxiosTruckData(truckData.storeno)
-          .then((res)=>setTruckData(res.data))
+          .then((res)=>setTruckData(res.data.truckData[0]))
         })
     }
     
     const handleComplain = () => {
-      truckComplain(id, AxiosTruckData.storeno)
-
+      truckComplain(id, truckData.storeno)
+        .then((res) => {
+          AxiosTruckData(truckData.storeno)
+          .then((res)=>setTruckData(res.data.truckData[0]))
+        })
     }
-    console.log(truckData.category);
 
   return (
     <div className="flex flex-col min-h-screen relative">
