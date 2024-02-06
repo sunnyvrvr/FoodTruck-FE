@@ -7,7 +7,7 @@ import { MdLocationPin } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 
 export default function MyPage() {
-  const URL = process.env.REACT_APP_KAKAO_URL;
+  const URL ='https://kauth.kakao.com/oauth/authorize?client_id=6f058c86db21168b8e6606ff565b4574&redirect_uri=https://yummytruck.shop/auth/kakao/callback&response_type=code'
   const userId = JSON.parse(localStorage.getItem('userId'));
   return (
     <div className='h-xxl w-screen'>
