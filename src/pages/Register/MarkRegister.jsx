@@ -74,6 +74,7 @@ export default function MarkRegister() {
       infoData['confirmed'] = confirm
       infoData['reportcount'] = 0
       infoData['id']=user.id
+      infoData['categoryid']=1   //카테고리 아이디 이야기 해봐야함
 
       console.log(infoData)
 
@@ -96,12 +97,9 @@ export default function MarkRegister() {
       const menuData = {}
       menu.forEach((item)=>{
         menuData['itemname']=item.menuName
-        menuData['iteminformation']=it
-        menuData['itemname']=item.menuName
-        menuData['itemname']=item.menuName
-        menuData['storeid']=store_id
-        menuData['id']=user.id
-
+        menuData['iteminformation']=item.description
+        menuData['itemprice']=item.price
+        menuData['storeno']=store_id
       })
       console.log(menuData)
       menuRegister(menuData)
