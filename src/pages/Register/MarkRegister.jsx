@@ -58,7 +58,7 @@ export default function MarkRegister() {
       
 
       infoData['storename'] = info.storeName
-      infoData['storetime'] = info.storeName
+      infoData['storetime'] = `${info.startTime}-${info.endTime}`
       infoData['category'] = info.category
       infoData['storeweek'] = storeWeek
       infoData['contact'] = info.phoneNumber
