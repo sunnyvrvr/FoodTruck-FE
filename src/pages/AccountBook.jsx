@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../layouts/Footer';
 import Header from '../layouts/header';
-import { accountData } from '../apis/axios';
+import { accountData as accountCall } from '../apis/axios';
+import { accountModify } from '../apis/axios';
+import { accountDelete } from '../apis/axios';
 
 export default function AccountBook() {
-  const [purchaseData, setPurchaseData] = useState([]);
+  const [accountData, setAccountData] = useState([]);
   const id = 'd41a74e1-985a-43d8-92c9-67ab2c7d7e9f'; // 로그인 기능구현 이후 코드변경
 
   useEffect(() => {
-    accountData(id)
+    accountCall(id)
       .then((response) => {
-        setPurchaseData(response.data.purchase);
+        setAccountData(response.data.purchase);
+        console.log(response.data.purchase)
       })
       .catch((error) => {
         console.error("계정 데이터를 가져오는 중 오류 발생:", error);
       });
-  }, [id]);
+  }, []);
 
   const formatDateString = (dateString) => {
     const date = new Date(dateString);
@@ -26,25 +29,51 @@ export default function AccountBook() {
   };
 
   const calculateTotalSum = () => {
-    if (!purchaseData || purchaseData.length === 0) {
+    if (!accountData || accountData.length === 0) {
       return 0;
     }
 
-    const totalSum = purchaseData.reduce((total, item) => {
+    const totalSum = accountData.reduce((total, item) => {
       return total + item.itempricesum * item.itemquantity; // itemquantity가 상품의 수량을 나타낸다고 가정합니다.
     }, 0);
     return totalSum;
   };
   
   //수량 증가 버튼
-  const handleIncreaseQuantity = () => {}
+  const handleIncreaseQuantity = (index) => {
+    const updatedAccountData = [...accountData];
+    const data = updatedAccountData[index]
+    accountModify(id, data.date, data.iteminformation, 1)
+      .then((res) => {
+        data.itemquantity += 1;
+        setAccountData(updatedAccountData);
+      })
+  }
 
   //수량 감소 버튼
-  const handleDecreaseQuantity =() => {}
-  //수량 수정 버튼
-  const handleEditItem = () =>{}
+  const handleDecreaseQuantity = (index) => {
+    const updatedAccountData = [...accountData];
+    const data = updatedAccountData[index] 
+    accountModify(id, data.date, data.information, -1)
+      .then((res) =>{
+        data.itemquantity += -1;
+        setAccountData(updatedAccountData);
+      }) 
+  }
+
   //내역 삭제 버튼 
-  const handleDeleteItem =() => {}
+  const handleDeleteItem = (index) => {
+    const deleteData = accountData[index] 
+    console.log(deleteData);
+    accountDelete(id, deleteData.date, deleteData.information)
+      .then((res) => {
+        const deleteAccountData = [...accountData];
+        deleteAccountData.splice(index, 1);
+        console.log(deleteAccountData);
+        setAccountData(deleteAccountData); //페이지 반영
+      });
+    }
+  
 
   return (
     <div className="flex flex-col h-xxl relative w-full">
@@ -54,7 +83,7 @@ export default function AccountBook() {
           <div className="bg-orange-200 h-1 w-full mt-0.5 mb-1"></div>
 
           {/* 소비금액 영역 */}
-          {purchaseData.map((purchaseItem) => (
+          {accountData.map((purchaseItem, index) => (
             <div key={purchaseItem.date} className="p-1 mb-2 w-full">
               <h2 className="mb-2 text-sm">{formatDateString(purchaseItem.date)}</h2>
               <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div>
@@ -65,25 +94,33 @@ export default function AccountBook() {
                   <p>
                     <span>{purchaseItem.iteminformation}</span>
                   </p>
-                  <span style={{ marginTop: '10px', display: 'inlineblock' }}>
+                  <p style={{ marginTop: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <button onClick={() => handleIncreaseQuantity(index)}
+                      style={{
+                        display: 'inline-block', marginRight: '5px', backgroundColor: 'bg-slate-200', 
+                        border: '1px solid #ccc', padding: '5px 10px', borderRadius: '3px', cursor: 'pointer'
+                    }}>
+                    +</button>
+                
                     <div>{purchaseItem.itemquantity}</div>
-                    <div>{purchaseItem.itempricesum} 원</div>
-                      <button onClick={() => handleIncreaseQuantity(purchaseItem.index)}
-                        style={{
-                          backgroundColor: 'bg-slate-300',
-                          border: '1px solid #ccc',
-                          padding: '5px 10px',
-                          borderRadius: '3px',
-                          marginRight: '5px',
-                          cursor: 'pointer',
+                    <button onClick={() => handleDecreaseQuantity(index)}
+                      style={{
+                        display: 'inline-block', marginRight: '5px', backgroundColor: 'bg-slate-200',
+                        border: '1px solid #ccc', padding: '5px 10px', borderRadius: '3px', cursor: 'pointer'
+                      }}>
+                    -</button>
 
-                        }}
-                        >
-                        +</button>
-                      <button onClick={() => handleDecreaseQuantity(purchaseItem.index)}>-</button>
-                      <button onClick={() => handleEditItem(purchaseItem.index)}>수정</button>
-                      <button onClick={() => handleDeleteItem(purchaseItem.index)}>삭제</button>
-                  </span>
+                    <div style={{ marginRight: '5px' }}>{purchaseItem.itempricesum} 원</div>
+         
+                    <button onClick={() => handleDeleteItem(index)}
+                      style={{
+                        display: 'inline-block',  marginRight: '5px', backgroundColor: 'bg-slate-200',
+                        border: '1px solid #ccc', padding: '5px 10px', borderRadius: '3px',  cursor: 'pointer'
+                      }}>
+                    삭제</button>
+                  </div>
+                  </p>
                 </li>
               </ul>
               {/* <p className="font-bold mb-4">지출 {expense.item.price}원</p> */}

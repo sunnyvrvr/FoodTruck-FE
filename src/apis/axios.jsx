@@ -70,9 +70,7 @@ export function accountDelete(id,date,menu){
   return api.delete(`account/delete?id=${id}&date=${date}&menu=${menu}`)
 }
 
-
 //마이페이지
-
 export function myPageData(id){
   return api.get(`/member?id=${id}`)
 }

@@ -31,7 +31,7 @@ export default function TruckInfo() {
   const navigate = useNavigate();
   const { storeno } = useParams();
   // const { id } = useParams(); //로그인 기능 구현 후 변경
-  const id ='b04f6ff6-22b3-48c8-b6f9-7a8468cf9099';
+  const id ='6f8eab40-7f0a-4c15-8bc3-d5d99d30be60';
 
   useEffect(() => {
     const AxiosData = async () => {
@@ -49,7 +49,7 @@ export default function TruckInfo() {
       }
     };
     AxiosData();
-  }, [storeno]);
+  }, []);
 
   
   if (loading) {
@@ -116,14 +116,19 @@ export default function TruckInfo() {
     }
 
     const handleLiked = () => {
-      truckGood(id, truckData.storeno)
-    
+
+      truckGood(id, AxiosTruckData.storeno)
+        .then((res) => {
+          AxiosTruckData(truckData.storeno)
+          .then((res)=>setTruckData(res.data))
+        })
     }
     
     const handleComplain = () => {
-      truckComplain(id, truckData.storeno)
+      truckComplain(id, AxiosTruckData.storeno)
 
     }
+    console.log(truckData.category);
 
   return (
     <div className="flex flex-col min-h-screen relative">
@@ -180,6 +185,7 @@ export default function TruckInfo() {
         </div>
       <div className="bg-gray-200 h-0.5 w-full mt-1 mb-1"></div>
 
+
       {!truckData.menu || truckData.menu.length === 0 ? (
         <p className="ml-8 mt-2 text-gray-400 text-center mb-2">메뉴 등록이 안된 상태입니다</p>
       ) : (
@@ -201,7 +207,7 @@ export default function TruckInfo() {
 
             <div onClick={handleInputAccount} className="w-full h-full absolute top-0 left-0" />
               <div className="w-24 h-24 rounded-full mr-4 border-2">
-                {CategoryImg(item.category)}
+                {CategoryImg(truckData.category)}
               </div>
               <div>
                 <p className ="font-semibold text-lg mb-0.5">{item.name}</p>

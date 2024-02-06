@@ -28,8 +28,8 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
       return;
     }
     truckReview(id, truckData.storeno, reviewContent, rating)
-
-    onClose();
+    onClose()
+    setTruckData(truckData)
   };
 
   useEffect(()=>{
