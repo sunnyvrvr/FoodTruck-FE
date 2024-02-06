@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { myPage } from '../../apis/fake'
 import Like from '../../features/Mypage/Like';
 import SimpleUI from '../../features/Mypage/Register'
 import Header from '../../layouts/header'
+import { myPageLike } from '../../apis/axios';
 
 export default function MyRegister() {
   const [data,setData] = useState();
 
-
   useEffect(()=>{
-    myPage('12345678','like')
+    myPageLike()
       .then((res)=>{
         setData(res.data.like)
+        console.log(res.data.like)
       })
   },[])
 

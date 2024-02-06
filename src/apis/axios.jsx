@@ -1,6 +1,9 @@
 import axios from 'axios'
 import React from 'react'
 
+const user = JSON.parse(localStorage.getItem('userId'));
+const userId = user?.id
+
 const api = axios.create({
   // baseURL:'https://www.yummytruck.store'
   baseURL:'http://localhost:4000/'
@@ -29,7 +32,7 @@ export function truckData(id){
 
 export function truckReview(id, storeno, storecontent, storerate){
   return api.post(`/truck/review`,{
-    id: id,
+    id: userId,
     storeno: storeno,
     storecontent: storecontent,
     storerate: storerate
@@ -38,21 +41,21 @@ export function truckReview(id, storeno, storecontent, storerate){
 
 export function truckComplain(id, storeno){
   return api.post('/truck/complain',{
-    id :id,
+    id :userId,
     storeno: storeno
   })
 }
 
 export function truckGood(id, storeno){
   return api.post('/truck/good',{
-    id : id,
+    id : userId,
     storeno, storeno
   })
 }
 
 export function inputAccount(id, menu){
   return api.post('/account/menu',{
-    id: id,
+    id: userId,
     iteminformation: menu
   })
 }
@@ -60,12 +63,12 @@ export function inputAccount(id, menu){
 //가계부
 
 export function accountData(id){
-  return api.get(`/account/${id}`)
+  return api.get(`/account/${userId}`)
 }
 
 export function accountModify(id, date, menu, factor){
   return api.patch('/account/menu/modify',{
-    id:id,
+    id:userId,
     date:date,
     iteminformation:menu,
     factor:factor
@@ -73,42 +76,48 @@ export function accountModify(id, date, menu, factor){
 }
 
 export function accountDelete(id,date,menu){
-  return api.delete(`account/delete?id=${id}&date=${date}&menu=${menu}`)
+  return api.delete(`account/delete?id=${userId}&date=${date}&menu=${menu}`)
 }
 
 
 //마이페이지
 
 export function myPageData(id){
-  return api.get(`/member?id=${id}`)
+  return api.get(`/member?id=${userId}`)
 }
 
 export function myPageComplain(id){
-  return api.get(`memberApi?member=${id}&option=report`)
+  return api.get(`memberApi?id=${userId}&option=report`)
 }
 
 export function myPageRegister(id){
-  return api.get(`memberApi?member=${id}&option=register`)
+  return api.get(`memberApi?id=${userId}&option=register`)
 }
 
 export function myPageLike(id){
-  return api.get(`memberApi?member=${id}&option=like`)
+  return api.get(`memberApi?id=${userId}&option=like`)
 }
 
 export function myPageLocation(id){
-  return api.get(`memberApi?member=${id}&option=favorite`)
+  return api.get(`memberApi?id=${userId}&option=favorite`)
 }
 
+
+//여기 수정
 export function myPageLocationPost(id, lat, lng, type){
-  return api.post(`/favoriteRegister?id=${id}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}`)
+  return api.post(`favoriteRegister`)
 }
 
-export function myPageUpdage(id, lat, lng, type){
-  return api.post(`/favoriteUpdate?id=${id}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}`)
+export function myPageLocationDelete(id, lat, lng, type){
+  return api.post(`/favoriteRegister?id=${userId}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}`)
+}
+
+export function myPageUpdate(id, lat, lng, type){
+  return api.post(`/favoriteUpdate?id=${userId}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}`)
 }
 
 export function myPageNickName(id, name){
-  return api.put(`/memberUpdage?id=${id}`,{
+  return api.put(`/memberUpdage?id=${userId}`,{
     name : name
   })
 }
