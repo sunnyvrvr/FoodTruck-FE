@@ -13,7 +13,7 @@ export default function MarkRegister() {
     const [alert,setAlert] = useState(false);
     const [alert2,setAlert2] = useState(false);
     const [alert3,setAlert3] = useState(false);
-    const [confirm,setConfirm] = useState(false)
+    const [confirm,setConfirm] = useState(0)
     const location = JSON.parse(localStorage.getItem('location'))
     const menu =  JSON.parse(localStorage.getItem('menu'))
     const info =  JSON.parse(localStorage.getItem('infoRegister'))
@@ -39,7 +39,7 @@ export default function MarkRegister() {
             else{
               console.log('100미터 이하');
               setAlert2(true)
-              setConfirm(true)
+              setConfirm(1)
             }
         }
         else{
