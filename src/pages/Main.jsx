@@ -9,6 +9,7 @@ import Serach from "../features/Main/Serach";
 import { main } from "../apis/axios";
 import Markerdesc from "../features/Main/Markerdesc";
 import { geocoder } from "../utils/geocoder";
+import LoginAlert from "../components/LoginAlert";
 // import useKakaoLoader from "./useKakaoLoader"
 
 export default function Main() {
@@ -102,7 +103,6 @@ export default function Main() {
         </Map>
         </div>
 
-
       {/* 헤더 부분 */}
       <Serach mapRef={mapRef} setCurrentAdress={setCurrentAdress} setCurrentLocation={setCurrentLocation} setMyLocation={setMyLocation} />
 
@@ -113,11 +113,11 @@ export default function Main() {
         <div className="w-4/5 h-12 border-2 border-black absolute top-0 rounded-full bg-white left-1/2 -translate-x-1/2 mt-12 flex items-center justify-center font-bold" onClick={()=>{handleReset()}}> 
         {currentAdress}
         </div>
+      </>
+      }
         <div className="absolute bottom-28 z-10 w-screen flex h-1/5 justify-center">
           <Carousel data={storeData} setCurrentLocation={setCurrentLocation} setForcusingTruck={setForcusingTruck} slideRef={slideRef}/>
         </div>
-      </>
-      }
     </div>
   )
 }

@@ -2,8 +2,12 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './header';
 import { TruckContextProvider } from '../context/TruckContext';
+import withAuth from '../hocs/WithAuth';
 
-export default function ResigterLayout() {
+function ResigterLayout() {
+    const user = JSON.parse(localStorage.getItem('userId'));
+    const userId = user?.id;
+
     return (
         <TruckContextProvider>
         <div className='h-dvh'>
@@ -14,3 +18,4 @@ export default function ResigterLayout() {
     );
 }
 
+export default withAuth(ResigterLayout)

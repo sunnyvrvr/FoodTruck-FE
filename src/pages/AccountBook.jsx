@@ -4,8 +4,9 @@ import Header from '../layouts/header';
 import { accountData as accountCall } from '../apis/axios';
 import { accountModify } from '../apis/axios';
 import { accountDelete } from '../apis/axios';
+import withAuth from '../hocs/WithAuth';
 
-export default function AccountBook() {
+function AccountBook() {
   const [accountData, setAccountData] = useState([]);
   const id = 'd41a74e1-985a-43d8-92c9-67ab2c7d7e9f'; // 로그인 기능구현 이후 코드변경
 
@@ -143,3 +144,4 @@ export default function AccountBook() {
     </div>
   );
 }
+export default withAuth(AccountBook)

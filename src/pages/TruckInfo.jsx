@@ -18,6 +18,7 @@ import { accountData } from '../apis/axios';
 import { Alert } from '../components/Alert';
 import { CategoryImg } from '../utils/categoryImg';
 import * as axiosApi from '../apis/axios'; 
+import Header from '../layouts/header';
 
 export default function TruckInfo() {
   const [truckData, setTruckData] = useState({ menu: [], review: []});
@@ -131,8 +132,8 @@ export default function TruckInfo() {
     console.log(truckData.category);
 
   return (
-
     <div className="flex flex-col min-h-screen relative">
+      <Header title={'상세 페이지'}/>
       {loading || !truckData? (
         <p>Loading... </p>
       ) : (
@@ -140,9 +141,9 @@ export default function TruckInfo() {
         {/* 트럭 사진 렌더링 */}
         { truckData && truckData.photo && (
           <img
-          src={truckData.photo}
+          src={`${process.env.PUBLIC_URL}/assets/foodTruck.jpg`}
           alt="Truck Photo"
-          style={{ width: '100%', height: 'auto', border: '1px solid #000' }}
+          className='w-screen border-b-2 aspect-[3/2]'
           />
         )}
           
