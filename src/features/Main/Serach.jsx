@@ -36,8 +36,8 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,set
       }
 
     return (
-        <header id='searchBox' className='absolute top-0 z-10 h-full'>
-        <div className="w-screen h-xxs bg-background flex items-center justify-between">
+        <header id='searchBox' className='absolute top-0 z-10 h-xxs'>
+        <div className="w-screen h-full bg-background flex items-center justify-between">
             <p className='text-3xl font-bold text-white ml-3'>FoodTruck</p>
             <Link to={userId ? '/mypage' : URL} className='w-auto px-5 bg-white font-bold text-background rounded-2xl border-1 flex justify-center mr-5 mt-2' >{userId ? userId.nickname : '로그인'}</Link>
         </div>

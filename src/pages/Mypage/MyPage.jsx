@@ -5,8 +5,9 @@ import { TbSpeakerphone } from "react-icons/tb";
 import { MdOutlineRateReview } from "react-icons/md";
 import { MdLocationPin } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
+import withAuth from '../../hocs/WithAuth';
 
-export default function MyPage() {
+function MyPage() {
   const URL = process.env.REACT_APP_KAKAO_URL;
   const userId = JSON.parse(localStorage.getItem('userId'));
   return (
@@ -40,3 +41,5 @@ export default function MyPage() {
     </div>
   )
 }
+
+export default withAuth(MyPage)
