@@ -52,37 +52,39 @@ export default function MarkRegister() {
       const infoData = {}
       const days = info.dayOfWeek;
       const storeWeek = days.join('');
+      let payment =''
       console.log(storeWeek)
 
+      if (info.payMent['cash']){payment+='/현금/'}
+      if (info.payMent['card']){payment+='카드/'}
+      if (info.payMent['account']){payment+='계좌/'}
 
-      
 
+      console.log(payment)
       infoData['storename'] = info.storeName
-      infoData['storetime'] = info.storeName
+      infoData['storetime'] = `${info.startTime}-${info.endTime}`
       infoData['category'] = info.category
       infoData['storeweek'] = storeWeek
       infoData['contact'] = info.phoneNumber
       infoData['account'] = info.account
-      infoData['payment'] = info.payMent
+      infoData['payment'] = payment
       infoData['latitude'] = location.lat
       infoData['longitude'] = location.lng
       infoData['location'] = info.storeAddress
       infoData['confirmed'] = confirm
       infoData['reportcount'] = 0
       infoData['id']=user.id
+      infoData['categoryid']=1   //카테고리 아이디 이야기 해봐야함
 
       console.log(infoData)
 
       infoRegister(infoData)
       .then((res)=>{
-        const store_id = res.data.storeid
+        const store_id = res.data.storeNo
         createMenuData(store_id)
       })
 
-      localStorage.removeItem('menu')
-      localStorage.removeItem('location')
-      localStorage.removeItem('infoRegister')
-      navigate('/')
+
     }
     useEffect(()=>{
       console.log(info)
@@ -95,15 +97,18 @@ export default function MarkRegister() {
       const menuData = {}
       menu.forEach((item)=>{
         menuData['itemname']=item.menuName
-        menuData['iteminformation']=it
-        menuData['itemname']=item.menuName
-        menuData['itemname']=item.menuName
-        menuData['storeid']=store_id
-        menuData['id']=user.id
-
+        menuData['iteminformation']=item.description
+        menuData['itemprice']=item.price
+        menuData['storeno']=store_id
       })
       console.log(menuData)
       menuRegister(menuData)
+      .then((res)=>{
+        localStorage.removeItem('menu')
+        localStorage.removeItem('location')
+        localStorage.removeItem('infoRegister')
+        navigate('/')
+      })
       
     }
 
