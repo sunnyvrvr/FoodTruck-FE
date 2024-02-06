@@ -70,7 +70,7 @@ export default function MarkRegister() {
       infoData['reportcount'] = 0
       infoData['id']=user.id
 
-
+      console.log(infoData)
 
       infoRegister(infoData)
       .then((res)=>{
@@ -99,7 +99,9 @@ export default function MarkRegister() {
         menuData['itemname']=item.menuName
         menuData['storeid']=store_id
         menuData['id']=user.id
+
       })
+      console.log(menuData)
       menuRegister(menuData)
       
     }
