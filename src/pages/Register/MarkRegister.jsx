@@ -75,7 +75,7 @@ export default function MarkRegister() {
 
       infoRegister(infoData)
       .then((res)=>{
-        const store_id = res.data.storeid
+        const store_id = res.data.storeNo
         createMenuData(store_id)
       })
 
