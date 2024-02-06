@@ -50,11 +50,12 @@ export default function MarkRegister() {
     }
     const handleSubmit=()=>{
       const infoData = {}
-      const storeWeek = ''
+      const days = info.dayOfWeek;
+      const storeWeek = days.join('');
+      console.log(storeWeek)
 
-      info.dayOfWeek.forEach((item)=>{
-        storeWeek.push(item)
-      })
+
+      
 
       infoData['storename'] = info.storeName
       infoData['storetime'] = info.storeName
