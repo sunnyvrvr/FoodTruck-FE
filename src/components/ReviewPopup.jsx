@@ -7,7 +7,12 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
   const [reviewContent, setReviewComment] = useState('');
   const [truckData, setTruckData]=useState('')
   const [rating, setRating] = useState(0);
+  const user = JSON.parse(localStorage.getItem('userId')); 
   const id = PId
+
+  useEffect(()=>{
+    console.log(user)
+  },[])
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -18,6 +23,12 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
   };
 
   const handleSubmit = () => {
+
+    if (!user){
+      alert('로그인후에 리뷰작성이 가능합니다!')
+      return;
+    }
+
     if (rating === 0) {
       alert('평점을 클릭하세요');
       return;
@@ -27,6 +38,7 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
       alert('리뷰내용을 작성하세요');
       return;
     }
+
     truckReview(id, truckData.storeno, reviewContent, rating)
     onClose()
     setTruckData(truckData)
@@ -45,7 +57,7 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
 
             <div className="flex items-center justify-center mb-4">
               <CgProfile className="w-8 h-8 text-gray-300 mr-2 cursor-pointer" />
-              <p className="text-sm">{`${id}`}</p> 
+              <p className="text-sm">{user ? user.nickname : '로그인이 필요합니다'}</p> 
             </div>
             <div className="flex items-center justify-center mb-4">
               {[...Array(5)].map((_, i) => (
