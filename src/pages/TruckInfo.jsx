@@ -7,26 +7,17 @@ import { PiSirenLight } from "react-icons/pi";
 import { BsCart4 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { LuPencilLine } from "react-icons/lu";
-import { FaStar } from "react-icons/fa";
 import { truckData as AxiosTruckData } from '../apis/axios';
-import { truckReview } from '../apis/axios';
 import { truckComplain } from '../apis/axios';
 import { truckGood } from '../apis/axios';
 import { inputAccount } from '../apis/axios';
-import { accountData } from '../apis/axios';
 import { CgChevronLeft } from "react-icons/cg";
 
-import { Alert } from '../components/Alert';
 import { CategoryImg } from '../utils/categoryImg';
-import * as axiosApi from '../apis/axios'; 
-import Header from '../layouts/header';
 
 export default function TruckInfo() {
   const [truckData, setTruckData] = useState({ menu: [], review: []});
   const [accountData, setAccountData] = useState(null);
-  const [liked, setLiked] = useState(null);
-  const [complained, setComplianed] = useState(null);
-  
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isReviewPopupOpen, setReviewPopupOpen] = useState(false);
   const [loading, setLoading] = useState(true);

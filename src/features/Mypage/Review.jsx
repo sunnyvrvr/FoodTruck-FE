@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Review({data}) {
   const time = new Date(data.reviewtime) 
@@ -6,7 +7,7 @@ export default function Review({data}) {
   const day = time.getDate();
 
   return (
-    <div className='mt-5 w-10/12'>
+    <Link to={`/foodtruck/${data.storeno}`} className='mt-5 w-10/12'>
         <p className='text-gray-400'>{`${month}/${day}`}</p>
         <div className='border-1 h-auto rounded-2xl border-black p-3'>
             <p className='font-bold'>{data.storename || '아직 데이터가 안들어옴'}</p>
@@ -17,6 +18,6 @@ export default function Review({data}) {
                 <p>{data.storecontent}</p>
             </div>
         </div>
-    </div>
+    </Link>
   )
 }
