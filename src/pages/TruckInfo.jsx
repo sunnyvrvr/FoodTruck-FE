@@ -153,7 +153,7 @@ export default function TruckInfo() {
           <img
           src={`${process.env.PUBLIC_URL}/assets/${randomTruckImage}`}
           alt="Truck Photo"
-          className='w-screen border-b-0 aspect-[1/1] xl:w-1/3'
+          className='w-1/2 border-b-0 aspect-[1/1] xl:w-1/3'
           />
         </div>
         
