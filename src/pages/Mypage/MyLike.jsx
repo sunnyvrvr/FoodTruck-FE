@@ -21,7 +21,9 @@ export default function MyRegister() {
       <Header title={'좋아요 누른 가게'}/>
       <div className='h-xxl flex flex-col items-center overflow-y-auto'>
         {data && data.map((item, index)=>{
-          return <Like data={item} index={index}/>
+          if(item.storename){
+            return <Like data={item} index={index}/>
+        }
         })}
       </div>
     </div>
