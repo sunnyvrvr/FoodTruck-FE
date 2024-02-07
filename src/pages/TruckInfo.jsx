@@ -91,7 +91,7 @@ export default function TruckInfo() {
   
     //가계부 추가 
     const handleInputAccount = ()=> {
-      inputAccount(id, accountData.menu)
+      inputAccount(id, truckData.menu)
       .then((res)=>{
         if (res.status) {
           accountData(id)
