@@ -59,7 +59,7 @@ export default function StarList({setCurrentLocation, setCurrentAdress, setMyLoc
         })
     }
     return (
-        <div className='w-80 flex justify-between my-5 ml-5'>
+        <div className='w-80 flex justify-between mt-5 ml-5'>
             <div onClick={()=>handleStar('home')} className='w-20 h-7 border-2 border-background rounded-lg flex justify-center items-center bg-background  font-bold text-white'>
               <span><IoHomeOutline/></span>
               <span className='ml-1'>집</span>
