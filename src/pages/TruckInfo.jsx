@@ -131,6 +131,7 @@ export default function TruckInfo() {
     console.log(truckData.category);
 
   return (
+
     <div className="flex flex-col min-h-screen relative">
       {loading || !truckData? (
         <p>Loading... </p>
