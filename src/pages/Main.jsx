@@ -20,10 +20,18 @@ export default function Main() {
     lat:37.56383445090615,
     lng:126.99059423964209
   });
+  
+const user = JSON.parse(localStorage.getItem('userId'));
+const userId = user?.id
   const [currentAdress, setCurrentAdress]=useState();
   const [currentLevel, setCurrentLevel]= useState(4);
   const [myLocation, setMyLocation]= useState();
   const [forcusingTruck, setForcusingTruck]=useState();
+
+  useEffect(()=>{
+    console.log('hello')
+    console.log(user)
+  },[])
 
 
   useEffect(()=>{
