@@ -43,9 +43,10 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,set
             <p className='text-3xl font-bold text-white ml-3'>FoodTruck</p>
             <Link to={userId ? '/mypage' : URL} className='w-auto px-5 bg-white font-bold text-background rounded-2xl border-1 flex justify-center mr-5 mt-2' >{userId ? userId.nickname : '로그인'}</Link>
         </div>
+          {userId &&
           <StarList setCurrentLocation={setCurrentLocation} setCurrentAdress={setCurrentAdress} setMyLocation={setMyLocation} map={mapRef.current}/>
-
-            <div className='w-screen flex justify-center'>
+          }
+            <div className='w-screen flex justify-center mt-5'>
               <input 
               className="z-3 border-2 border-black w-4/5 h-12 rounded-full pl-5" 
               type="text"
