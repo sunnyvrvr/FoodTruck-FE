@@ -6,7 +6,7 @@ import { TruckContextProvider } from '../context/TruckContext';
 export default function ResigterLayout() {
     return (
         <TruckContextProvider>
-        <div className='h-screen'>
+        <div className='h-dvh'>
             <Header  title={'가게 등록'}/>
             <Outlet />
         </div>

@@ -1,7 +1,5 @@
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import Footer from "../layouts/Footer";
 import { useEffect, useRef, useState } from "react";
-import SimpleInfo from '../features/Main/SimpleInfo';
 import truckMarker from '../assets/marker_truck.png';
 import currMarker from '../assets/marker_blue.png';
 
@@ -10,7 +8,6 @@ import Serach from "../features/Main/Serach";
 // import { main } from "../apis/axios";
 import { main } from "../apis/axios";
 import Markerdesc from "../features/Main/Markerdesc";
-import { Link, useNavigate } from "react-router-dom";
 import { geocoder } from "../utils/geocoder";
 // import useKakaoLoader from "./useKakaoLoader"
 
@@ -23,7 +20,7 @@ export default function Main() {
     lng:126.99059423964209
   });
   const [currentAdress, setCurrentAdress]=useState();
-  const [currentLevel, setCurrentLevel]= useState(1);
+  const [currentLevel, setCurrentLevel]= useState(4);
   const [myLocation, setMyLocation]= useState();
   const [forcusingTruck, setForcusingTruck]=useState();
 
@@ -67,7 +64,7 @@ export default function Main() {
           id='map'
           center={currentLocation}   // 지도의 중심 좌표
           style={{ width: '100%', height: '100%' }} // 지도 크기
-          level={7}     
+          level={4}     
           
           onCenterChanged={(map)=>{
             setCurrentLevel(Math.ceil(map.getLevel()/3))
@@ -85,6 +82,7 @@ export default function Main() {
         />}
 
         {/* // 가게들 마커 */}
+        {storeData && console.log(storeData)}
         {storeData && storeData.map((marker, index) => (
         <MapMarker
           onClick={()=>{slideRef.current.slickGoTo(index)}}

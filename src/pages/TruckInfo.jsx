@@ -131,10 +131,12 @@ export default function TruckInfo() {
     console.log(truckData.category);
 
   return (
+
     <div className="flex flex-col min-h-screen relative">
       {loading || !truckData? (
         <p>Loading... </p>
       ) : (
+
       <div className="w-screen h-xxl flex-1 overflow-y-auto">
         {/* 트럭 사진 렌더링 */}
         { truckData && truckData.photo && (
