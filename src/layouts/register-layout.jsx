@@ -6,7 +6,7 @@ import withAuth from '../hocs/WithAuth';
 
 function ResigterLayout() {
     const user = JSON.parse(localStorage.getItem('userId'));
-    const userId = user?.id;
+    const userId = user?.social_id;
 
     return (
         <TruckContextProvider>

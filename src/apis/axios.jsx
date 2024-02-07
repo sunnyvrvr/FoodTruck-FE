@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 
 const user = JSON.parse(localStorage.getItem('userId'));
-const userId = user?.id
+const userId = user?.social_id
 
 const api = axios.create({
 baseURL:'https://www.yummytruck.store'
