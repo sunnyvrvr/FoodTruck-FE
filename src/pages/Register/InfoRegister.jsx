@@ -24,6 +24,7 @@ export default function InfoRegister() {
     const [name, setName] = useState('');
     const [alert,setAlert] = useState(false)
     const [payMent,setPayMent]=useState('');
+    const [category, setCategory]=useState('')
     const info = localStorage.getItem('infoRegister')
     
     useEffect(() => {

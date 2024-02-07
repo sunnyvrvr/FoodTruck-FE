@@ -57,7 +57,7 @@ export default function Main() {
 
 
   return (
-    <div className="h-xxl relative">
+    <div className="h-xxl relative overflow-hidden">
 
       {/* 지도 호출 */}
       <div className="h-full w-scree z-0 relative">
@@ -83,7 +83,7 @@ export default function Main() {
         />}
 
         {/* // 가게들 마커 */}
-        {storeData && console.log(storeData)}
+        {/* {storeData && console.log(storeData)} */}
         {storeData && storeData.map((marker, index) => (
         <MapMarker
           onClick={()=>{slideRef.current.slickGoTo(index)}}
