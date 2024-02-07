@@ -233,7 +233,7 @@ export default function TruckInfo() {
         <LuPencilLine className="text-right mr-7 cursor-pointer"
           onClick={openReviewPopup}
         />
-        <ReviewPopup isOpen={isReviewPopupOpen} onClose={closeReviewPopup} data={truckData} PId={id} setTruckData={setTruckData} /> 
+        <ReviewPopup isOpen={isReviewPopupOpen} onClose={closeReviewPopup} data={truckData} PId={id} setTruckData={setTruckData} storeno={truckData.storeno} /> 
       </div>
       <div className="bg-gray-200 h-0.5 w-full"></div>
 
