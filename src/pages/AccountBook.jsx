@@ -86,10 +86,11 @@ function AccountBook() {
           {/* 소비금액 영역 */}
           {accountData.map((purchaseItem, index) => (
             <div key={purchaseItem.date} className="p-1 mb-2 w-full">
-              <h2 className="mb-2 text-sm">{purchaseItem.date}</h2>
+              <h2 className="mb-2 text-sm text-gray-300">{purchaseItem.date}</h2>
               <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div>
 
-              <p>{purchaseItem.storename}</p>
+              <p className='text-xl font-bold'>{`가게- ${purchaseItem.storename}`}</p>
+              <p>{`메뉴 - ${purchaseItem.itemname}`}</p>
               <ul>
                 <li key={purchaseItem.date} className="flex justify-between">
                   <p>
