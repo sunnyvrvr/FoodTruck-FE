@@ -21,10 +21,10 @@ function MyPage() {
       </header>
       <div className='h-xxl '>
         <div className='h-2/5 border-1 flex flex-col items-center'>
-            <div className='bg-gray-300 h-3/5 aspect-square rounded-full mt-8'>
-                <FaUser className='w-full h-full'/>
+            <div className='h-3/5 aspect-square rounded-full mt-8'>
+                <FaUser className='w-full h-full bg-gray-300 rounded-full '/>
             </div>
-            <div className='flex mt-8 items-center justify-center w-screen'>
+            <div className='flex mt-4 items-center justify-center w-screen'>
               {
                 userId
                 ? <p className='text-xl font-semibold w-auto border-b-1 border-stone-400' >{userId.nickname}</p>

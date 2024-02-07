@@ -8,7 +8,7 @@ export default function MyRegister() {
   const [data,setData] = useState();
 
   useEffect(()=>{
-    myPageLike()
+    myPageLike('123')
       .then((res)=>{
         setData(res.data.like)
         console.log(res.data.like)
