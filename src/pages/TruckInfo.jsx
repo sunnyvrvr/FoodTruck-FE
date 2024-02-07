@@ -34,6 +34,8 @@ export default function TruckInfo() {
   const { storeno } = useParams();
   // const { id } = useParams(); //로그인 기능 구현 후 변경
   const id ='6f8eab40-7f0a-4c15-8bc3-d5d99d30be60';
+  const truckImages =  ['truck1.jpg', 'truck2.jpg', 'truck3.jpg', 'truck4.jpg', 'truck5.jpg', 'truck6.jpg', 'truck7.jpg', 'truck8.jpg', 'truck9.jpg']; 
+  const randomTruckImage = truckImages[Math.floor(Math.random() * truckImages.length)];
 
   useEffect(() => {
     const AxiosData = async () => {
@@ -83,7 +85,7 @@ export default function TruckInfo() {
     // 리뷰의 평균 평점
     const calculateAverageRating = () => {
       if (!truckData || !truckData.review || truckData.review.length === 0) {
-        return "리뷰없음";
+        return "";
       }
       const totalRating = truckData.review.reduce((sum, review) => sum + review.rating, 0);
       return totalRating / truckData.review.length;
@@ -146,11 +148,12 @@ export default function TruckInfo() {
       ) : (
       <div className="w-screen h-xxl flex-1 overflow-y-auto">
         {/* 트럭 사진 렌더링 */}
+        
         <div className='flex justify-center w-screen'>
           <img
-          src={`${process.env.PUBLIC_URL}/assets/foodTruck.jpg`}
+          src={`${process.env.PUBLIC_URL}/assets/${randomTruckImage}`}
           alt="Truck Photo"
-          className='w-screen border-b-2 aspect-[2/1] xl:w-1/3'
+          className='w-screen border-b-0 aspect-[1/1] xl:w-1/3'
           />
         </div>
         
@@ -178,11 +181,11 @@ export default function TruckInfo() {
               <div className="mr-7 ml-1">{`${truckData.report}`}</div>
           </div>
         </div>       
-          <p>{`음식 카테고리: ${truckData.category}`}</p>
-          <p>{`연락처: ${truckData.contact}`}</p>
-          <p>{`계좌: ${truckData.account}`}</p>
-          <p>{`영업 요일: ${truckData.businessDays}`}</p>
-          <p>{`영업 시간: ${truckData.businessTime}`}</p>            
+          <p className="font-sans">{`카테고리: ${truckData.category}`}</p>
+          <p className="font-sans">{`연락처: ${truckData.contact}`}</p>
+          <p className="font-sans">{`계좌: ${truckData.account}`}</p>
+          <p className="font-sans">{`영업 요일: ${truckData.businessDays}`}</p>
+          <p className="font-sans">{`영업 시간: ${truckData.businessTime}`}</p>            
         </div>
 
       {/* 메뉴 */}
@@ -197,7 +200,7 @@ export default function TruckInfo() {
 
 
       {!truckData.menu || truckData.menu.length === 0 ? (
-        <p className="ml-8 mt-2 text-gray-400 text-center mb-2">메뉴 등록이 안된 상태입니다</p>
+        <p className="ml-8 mt-2 text-gray-400 text-center text-sm mb-2">등록된 메뉴가 없습니다</p>
       ) : (
       <ul>
       {truckData.menu.map((item, index) => (
@@ -246,7 +249,7 @@ export default function TruckInfo() {
           <span className="text-black">{` ${calculateAverageRating()}`}</span>
         </p>
       </div>
-        <LuPencilLine className="text-right mr-5 cursor-pointer"
+        <LuPencilLine className="text-right mr-7 cursor-pointer"
           onClick={openReviewPopup}
         />
         <ReviewPopup isOpen={isReviewPopupOpen} onClose={closeReviewPopup} data={truckData} PId={id} setTruckData={setTruckData} /> 
@@ -287,8 +290,8 @@ export default function TruckInfo() {
           ))
         ) : (
           // 리뷰없음
-          <div className="text-center text-gray-400 mt-4 mb-2">
-            <p>리뷰가 없습니다</p>
+          <div className="text-center text-gray-400 text-sm mt-4 mb-2">
+            <p>등록된 리뷰가 없습니다</p>
             <div className="mb-2 ml-8">
 
             </div>

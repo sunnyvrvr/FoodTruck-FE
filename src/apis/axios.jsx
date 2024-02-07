@@ -19,6 +19,7 @@ export function infoRegister(data){
     data: data
   })
 }
+
 export function menuRegister(data){
   return api.post('/itemRegister',{
     data: data
@@ -83,12 +84,12 @@ export function myPageData(id){
   return api.get(`/member?id=${userId}`)
 }
 
-export function myPageComplain(id){
-  return api.get(`memberApi?id=${userId}&option=report`)
+export function myPageReview(id){
+  return api.get(`memberApi?id=${userId}&option=review`)
 }
 
 export function myPageRegister(id){
-  return api.get(`memberApi?id=${userId}&option=register`)
+  return api.get(`memberApi?id=${userId}&option=store`)
 }
 
 export function myPageLike(id){
