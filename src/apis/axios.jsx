@@ -54,10 +54,13 @@ export function truckGood(id, storeno){
   })
 }
 
-export function inputAccount(id, menu){
+export function inputAccount(id, itemname, itemprice, storeno, date){
   return api.post('/account/menu',{
     id: userId,
-    iteminformation: menu
+    itemname: itemname,
+    itemprice : itemprice,
+    storeno : storeno,
+    date : date,
   })
 }
 
@@ -70,7 +73,7 @@ export function accountModify(id, date, menu, factor){
   return api.patch('/account/menu/modify',{
     id:userId,
     date:date,
-    iteminformation:menu,
+    itemname:menu,
     factor:factor
   })
 }
@@ -111,7 +114,7 @@ export function myPageLocationDelete(id, lat, lng, type){
 }
 
 export function myPageUpdate(id, lat, lng, type){
-  return api.post(`/favoriteUpdate?id=${userId}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}`)
+  return api.put(`/favoriteUpdate?id=${userId}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}&favoriteno=124`)
 }
 
 export function myPageNickName(id, name){

@@ -9,19 +9,15 @@ const withAuth = (Component) => (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userId) {
-        navigate('/login',{replace:true})
+    if (!userId) { // user정보가 없는가?
+        navigate('/login',{replace:true}) // replace를 통해, history 쌓이지 않음
     }
   }, [userId]);
 
-  if (userId) {
+  if (userId) { // user 정보가 있는가?
     console.log('로그인이 되어있음');
     return <Component {...props} />;
   }
-
-  // 로그인이 되어 있지 않으면 여기서 처리 (예: 로그인 페이지로 리다이렉트)
-  // navigate('/');
-  navigate('/login')// 로그인이 되어 있지 않을 때 null 반환
 };
 
 export default withAuth;
