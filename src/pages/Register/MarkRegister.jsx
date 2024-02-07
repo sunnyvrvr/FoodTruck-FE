@@ -94,21 +94,21 @@ export default function MarkRegister() {
     },[])
 
     const createMenuData = (store_id) =>{
-      const menuData = {}
+      const menuDatas =[]
       menu.forEach((item)=>{
+        const menuData = {}
         menuData['itemname']=item.menuName
         menuData['iteminformation']=item.description
         menuData['itemprice']=item.price
         menuData['storeno']=store_id
+        menuRegister(menuData)
       })
-      console.log(menuData)
-      menuRegister(menuData)
-      .then((res)=>{
+     
         localStorage.removeItem('menu')
         localStorage.removeItem('location')
         localStorage.removeItem('infoRegister')
         navigate('/')
-      })
+      
       
     }
 
