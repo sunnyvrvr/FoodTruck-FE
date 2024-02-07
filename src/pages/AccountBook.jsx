@@ -63,16 +63,12 @@ function AccountBook() {
   }
 
   //내역 삭제 버튼 
-  const handleDeleteItem = (index) => {
-    const deleteData = accountData[index] 
-    console.log(deleteData);
-    accountDelete(id, deleteData.date, deleteData.information)
-      .then((res) => {
-        const deleteAccountData = [...accountData];
-        deleteAccountData.splice(index, 1);
-        console.log(deleteAccountData);
-        setAccountData(deleteAccountData); //페이지 반영
-      });
+  const handleDeleteItem = (item) => {
+    accountDelete(id,item.date, item.itemname)
+    .then((res)=>{
+      accountCall(id)
+      .then((res)=>setAccountData(res.data.purchase))
+    })
     }
   
 
@@ -109,7 +105,7 @@ function AccountBook() {
 
                     <div style={{ marginRight: '5px' }}>{purchaseItem.itempricesum} 원</div>
          
-                    <button onClick={() => handleDeleteItem(index)}
+                    <button onClick={() => handleDeleteItem(purchaseItem)}
                       style={{
                         display: 'inline-block',  marginRight: '5px', backgroundColor: 'bg-slate-200',
                         border: '1px solid #ccc', padding: '5px 10px', borderRadius: '3px',  cursor: 'pointer'
