@@ -138,10 +138,9 @@ export default function TruckInfo() {
       <div className="w-screen h-xxl flex-1 overflow-y-auto">
         {/* 트럭 사진 렌더링 */}
         { truckData && truckData.photo && (
-          <img
-          src={truckData.photo}
-          alt="Truck Photo"
-          style={{ width: '100%', height: 'auto', border: '1px solid #000' }}
+          <CategoryImg
+            className="w-full h-5 object-cover"
+            category={truckData.category}
           />
         )}
           
