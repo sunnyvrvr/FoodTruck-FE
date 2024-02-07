@@ -5,7 +5,7 @@ import LoginAlert from '../components/LoginAlert';
 
 const withAuth = (Component) => (props) => {
   const user = JSON.parse(localStorage.getItem('userId'));
-  const userId = user?.id;
+  const userId = user?.social_id;
   const navigate = useNavigate();
 
   useEffect(() => {
