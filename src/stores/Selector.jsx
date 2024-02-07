@@ -1,5 +1,5 @@
 const user = JSON.parse(localStorage.getItem('userId'));
-const userId = user?.social_id
+const userId = user?.id
 
 export const isLoginSelector = selector({
     key: 'isLoginSelector',
