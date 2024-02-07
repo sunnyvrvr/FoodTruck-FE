@@ -23,7 +23,6 @@ export default function TruckInfo() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { storeno } = useParams();
-  // const { id } = useParams(); //로그인 기능 구현 후 변경
   const id ='6f8eab40-7f0a-4c15-8bc3-d5d99d30be60';
   const truckImages =  ['truck1.jpg', 'truck2.jpg', 'truck3.jpg', 'truck4.jpg', 'truck5.jpg', 'truck6.jpg', 'truck7.jpg', 'truck8.jpg', 'truck9.jpg']; 
   const randomTruckImage = truckImages[Math.floor(Math.random() * truckImages.length)];
@@ -90,24 +89,15 @@ export default function TruckInfo() {
     };
   
     //가계부 추가 
-    const handleInputAccount = ()=> {
-      inputAccount(id, truckData.menu)
+    const handleInputAccount = (item)=> {
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      const date = `${month}/${day}`
+      inputAccount(id, item.name, item.price, truckData.storeno, date)
       .then((res)=>{
-        if (res.status) {
-          accountData(id)
-            .then((res) => setAccountData(res))
-            .catch((error) => {
-              console.errror('트럭 상세페이지 데이터 에러 발생:', error);
-            })
-        }
-        accountData(accountData.id)
-        .then((res)=>setAccountData(res))
+        console.log(res)
       })
-      .catch((error) => {
-        console.error('가계부 페이지 이동 에러:', error);
-      });
-      // setShowAlert(true);
-      navigate('/accountBook')
     }
 
     const handleLiked = () => {
@@ -209,7 +199,7 @@ export default function TruckInfo() {
               </>
             )}
 
-            <div onClick={handleInputAccount} className="w-full h-full absolute top-0 left-0" />
+            <div onClick={()=>handleInputAccount(item)} className="w-full h-full absolute top-0 left-0" />
               <div className="w-24 h-24 rounded-full mr-4 border-2">
                 {CategoryImg(truckData.category)}
               </div>

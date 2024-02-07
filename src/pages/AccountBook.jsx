@@ -86,7 +86,7 @@ function AccountBook() {
           {/* 소비금액 영역 */}
           {accountData.map((purchaseItem, index) => (
             <div key={purchaseItem.date} className="p-1 mb-2 w-full">
-              <h2 className="mb-2 text-sm">{formatDateString(purchaseItem.date)}</h2>
+              <h2 className="mb-2 text-sm">{purchaseItem.date}</h2>
               <div className="bg-gray-100 h-0.5 w-full mt-1 mb-1"></div>
 
               <p>{purchaseItem.storename}</p>
@@ -96,20 +96,14 @@ function AccountBook() {
                     <span>{purchaseItem.iteminformation}</span>
                   </p>
                   <p style={{ marginTop: '10px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div className='flex items-center'>
                     <button onClick={() => handleIncreaseQuantity(index)}
-                      style={{
-                        display: 'inline-block', marginRight: '5px', backgroundColor: 'bg-slate-200', 
-                        border: '1px solid #ccc', padding: '5px 10px', borderRadius: '3px', cursor: 'pointer'
-                    }}>
+                      className='text-2xl font-bold text-background '>
                     +</button>
                 
-                    <div>{purchaseItem.itemquantity}</div>
+                    <div className='text-xl mx-3 mt-1'>{purchaseItem.itemquantity}</div>
                     <button onClick={() => handleDecreaseQuantity(index)}
-                      style={{
-                        display: 'inline-block', marginRight: '5px', backgroundColor: 'bg-slate-200',
-                        border: '1px solid #ccc', padding: '5px 10px', borderRadius: '3px', cursor: 'pointer'
-                      }}>
+                      className='text-4xl font-bold text-background mr-3 mb-1'>
                     -</button>
 
                     <div style={{ marginRight: '5px' }}>{purchaseItem.itempricesum} 원</div>
