@@ -32,6 +32,7 @@ export default function StarList({setCurrentLocation, setCurrentAdress, setMyLoc
 
     function handleStar(type){
         let lat;
+        
         let lng;
         switch(type){
             case 'home':
