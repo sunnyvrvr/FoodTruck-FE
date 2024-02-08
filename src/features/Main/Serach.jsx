@@ -48,8 +48,10 @@ export default function Serach({mapRef, setCurrentAdress, setCurrentLocation,set
         <header id='searchBox' className='absolute top-0 z-10 h-xxs'>
         <div className="w-screen h-full bg-background flex items-center justify-between">
             <p className='text-3xl font-bold text-white ml-3'>FoodTruck</p>
+            <div className='flex mr-5'>
             <Link to={userId ? '/mypage' : URL} className='w-auto px-5 bg-white font-bold text-background rounded-2xl border-1 flex justify-center mr-5 mt-2' >{userId ? userId.nickname : '로그인'}</Link>
             <div onClick={handleLogout} className={`${userId ? 'block' : 'hidden'}  w-auto text-sm px-5 bg-white font-bold text-background rounded-2xl border-1 flex justify-center mt-2`} >로그아웃</div>
+            </div>
         </div>
           {userId &&
           <StarList setCurrentLocation={setCurrentLocation} setCurrentAdress={setCurrentAdress} setMyLocation={setMyLocation} map={mapRef.current}/>
