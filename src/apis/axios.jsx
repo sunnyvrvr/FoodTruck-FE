@@ -50,7 +50,7 @@ export function truckComplain(id, storeno){
 export function truckGood(id, storeno){
   return api.post('/truck/good',{
     id : userId,
-    storeno, storeno
+    storeno: storeno
   })
 }
 
