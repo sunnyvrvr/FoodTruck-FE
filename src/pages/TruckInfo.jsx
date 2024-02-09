@@ -144,8 +144,13 @@ export default function TruckInfo() {
           
         {/* 좋아요 및 신고 정보 */}
         <div className="ml-5 flex items-center mb-1">
-        <GiCheckMark style={{ color: 'blue' }} />
-          <p className="ml-2 text-xs font-sans">{`좋아요가 ${truckData.like}개 이상인 가게에요!`}</p>
+          <GiCheckMark style={{ color: 'blue' }} />
+          <p className="ml-2 text-xs font-sans">
+            { truckData.like !== 0 && `좋아요가 ${truckData.like}개 이상인 가게에요!`}
+          </p>
+          <p className="ml-2 text-xs font-sans text-zinc-400">
+            { truckData.like == 0 && `아직 좋아요가 없는 가게입니다`} 
+          </p>
         </div>
           <div className="bg-orange-200 h-1 w-full mt-2"></div>
           <div className="mt-2 mb-2 ml-8">
@@ -174,7 +179,7 @@ export default function TruckInfo() {
         <div className="flex items-center">
           <h2 className="text-2xl font-bold mt-2 mb-2 ml-8">메뉴</h2>
           <div className="ml-15 mt-2 pl-2">
-            <p className="text-zinc-400 text-sm">메뉴를 클릭하면 가계부로 이동합니다</p>
+            <p className="text-zinc-400 text-sm">메뉴를 클릭하면 가계부에 등록됩니다</p>
           </div>
         </div>
       <div className="bg-gray-200 h-0.5 w-full mt-1 mb-1"></div>
