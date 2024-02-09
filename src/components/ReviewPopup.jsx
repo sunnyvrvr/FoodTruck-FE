@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { CgProfile } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
-import { truckReview, truckData } from '../apis/axios';
+import { truckReview, truckData as truckFollow } from '../apis/axios';
 
-const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
+const ReviewPopup = ({ storeno, isOpen, onClose, truckdata, PId, setTruckData}) => {
   const [reviewContent, setReviewComment] = useState('');
-  const [truckData, setTruckData]=useState('')
+  const [data, setData]=useState('')
   const [rating, setRating] = useState(0);
   const user = JSON.parse(localStorage.getItem('userId')); 
   const id = PId
 
   useEffect(()=>{
     console.log(user)
+    console.log(truckdata)
+    console.log(storeno)
   },[])
 
   const handleRatingChange = (value) => {
@@ -39,13 +41,17 @@ const ReviewPopup = ({ isOpen, onClose, data, PId }) => {
       return;
     }
 
-    truckReview(id, truckData.storeno, reviewContent, rating)
+    truckReview(id, storeno, reviewContent, rating)
+    .then((res)=>{
+      console.log(res)
+      truckFollow(storeno)
+      .then((res)=>setTruckData(res.data.truckData[0]))
+    })
     onClose()
-    setTruckData(truckData)
   };
 
   useEffect(()=>{
-    setTruckData(data)
+    setData(truckdata)
   },[])
 
   return (

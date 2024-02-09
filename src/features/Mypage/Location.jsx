@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoHomeOutline } from "react-icons/io5";
 import { FaRegStar,FaRegBuilding } from "react-icons/fa";
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,15 +6,33 @@ import { getAddr } from '../../utils/adressName';
 
 export default function Location({data}) {
   const navigate = useNavigate();
-  const adressName = getAddr(data.favoriteLatitude, data.favortieLongitude)
+  const [addressName, setAddressName] = useState('');
+  getAddr(data.favoriteLatitude, data.favoriteLongitude).then(res=>{
+    setAddressName(res)
+  })
   const handleIcon=(type)=>{
     switch (type){
       case 'home':
-        return <IoHomeOutline className='text-2xl'/>
+        return (
+          <p className='flex '>
+            <span><IoHomeOutline className='text-2xl'/> </span>
+            <span className='ml-3 font-bold'>우리 집</span>
+          </p>
+        )
       case 'company':
-        return <FaRegBuilding className='text-2xl'/>
-      case 'location':
-        return <FaRegStar className='text-2xl'/>
+        return (
+          <p className='flex '>
+            <span><FaRegBuilding className='text-2xl'/> </span>
+            <span className='ml-3 font-bold'>직장</span>
+          </p>
+        )
+      case 'etc':
+        return (
+          <p className='flex '>
+            <span><FaRegStar className='text-2xl'/></span>
+            <span className='ml-3 font-bold'>기타</span>
+          </p>
+        )
       default:
 
     }
@@ -35,7 +53,7 @@ export default function Location({data}) {
    if(data){
     return(
     <div>
-      <p className='text-sm'>{`주소 :${adressName}`}</p>
+      <p className='text-sm'>{`주소 : ${addressName}`}</p>
       <div className='flex justify-around mt-5 '>
         <button onClick={handleUpdate} className='border-1 border-black rounded-2xl w-36'>수정</button>
         <button onClick={handleDelete} className='border-1 border-black rounded-2xl w-36'>삭제</button>

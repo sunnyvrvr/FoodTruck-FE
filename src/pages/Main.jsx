@@ -20,10 +20,18 @@ export default function Main() {
     lat:37.56383445090615,
     lng:126.99059423964209
   });
+  
+const user = JSON.parse(localStorage.getItem('userId'));
+const userId = user?.id
   const [currentAdress, setCurrentAdress]=useState();
   const [currentLevel, setCurrentLevel]= useState(4);
   const [myLocation, setMyLocation]= useState();
   const [forcusingTruck, setForcusingTruck]=useState();
+
+  useEffect(()=>{
+    console.log('hello')
+    console.log(user)
+  },[])
 
 
   useEffect(()=>{
@@ -57,7 +65,7 @@ export default function Main() {
 
 
   return (
-    <div className="h-xxl relative">
+    <div className="h-xxl relative overflow-hidden">
 
       {/* 지도 호출 */}
       <div className="h-full w-scree z-0 relative">
@@ -83,7 +91,7 @@ export default function Main() {
         />}
 
         {/* // 가게들 마커 */}
-        {storeData && console.log(storeData)}
+        {/* {storeData && console.log(storeData)} */}
         {storeData && storeData.map((marker, index) => (
         <MapMarker
           onClick={()=>{slideRef.current.slickGoTo(index)}}
