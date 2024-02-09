@@ -5,7 +5,8 @@ const user = JSON.parse(localStorage.getItem('userId'));
 const userId = user?.id
 
 const api = axios.create({
-baseURL:'https://www.yummytruck.store'
+    baseURL:'https://www.seoulfoodtruck.store'
+//  baseURL:'https://www.yummytruck.store'
 //  baseURL: 'http://localhost:5000'
 })
 
@@ -50,17 +51,14 @@ export function truckComplain(id, storeno){
 export function truckGood(id, storeno){
   return api.post('/truck/good',{
     id : userId,
-    storeno: storeno
+    storeno, storeno
   })
 }
 
-export function inputAccount(id, itemname, itemprice, storeno, date){
+export function inputAccount(id, menu){
   return api.post('/account/menu',{
     id: userId,
-    itemname: itemname,
-    itemprice : itemprice,
-    storeno : storeno,
-    date : date,
+    iteminformation: menu
   })
 }
 
@@ -73,7 +71,7 @@ export function accountModify(id, date, menu, factor){
   return api.patch('/account/menu/modify',{
     id:userId,
     date:date,
-    itemname:menu,
+    iteminformation:menu,
     factor:factor
   })
 }
@@ -114,7 +112,7 @@ export function myPageLocationDelete(id, lat, lng, type){
 }
 
 export function myPageUpdate(id, lat, lng, type){
-  return api.put(`/favoriteUpdate?id=${userId}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}&favoriteno=124`)
+  return api.post(`/favoriteUpdate?id=${userId}&favoriteLatitude=${lat}&favoriteLongitude=${lng}&location_code=${type}`)
 }
 
 export function myPageNickName(id, name){
