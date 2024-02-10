@@ -28,9 +28,24 @@ export default function TruckInfo() {
   const randomTruckImage = truckImages[Math.floor(Math.random() * truckImages.length)];
 
   useEffect(() => {
+    const handleNavigation = (direction) => {
+      if(direction === 1) {
+        navigate(-1);
+      } else {
+        navigate('/');
+      }
+    };
+    
     const AxiosData = async () => {
       try {
         const response = await AxiosTruckData(storeno);
+
+        if(!response.data.truckData || response.data.truckData.length === 0) {
+          alert ( '해당 상품을 찾을 수 없습니다. 다시 확인 후 조회하여 주십시오.');
+          handleNavigation(1);
+          return;       
+        }
+
         if (response.data.truckData && response.data.truckData.length > 0) {
           setTruckData(response.data.truckData[0]);
         } else {
@@ -44,14 +59,15 @@ export default function TruckInfo() {
     };
     AxiosData();
   }, []);
-
-  
+ 
   if (loading) {
     return <div>Loading...</div>;
   }
   console.log('id:', id); // id 값
   console.log('storeno:', storeno); // id 값
   console.log('truckData:', truckData); // truckData 값이 어떻게 변경되는지 확인
+
+
 
   // 메뉴 - 가계부추가 (x)
   const handleAddToAccount = (index) => {
