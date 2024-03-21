@@ -1,46 +1,48 @@
-# FoodTruck-Fe
-
-<br></br>
-Commit Convention
-
-### 브랜치 사용방법
-
-Feat이라는 기능 개발용 브랜치 하나 만들고, 여기에 계속 넣다가
-해당 기능 완성되면 develop에 merge 하기
-
-### 파일들 설명
-
-api => api관련된 파일들
-
-assets => 정적인 이미지 파일들
-
-components => 전역적으로 재사용하는 컴포넌트 (ex. button, input)
-
-features => 기능별 재사용할 컴포넌트들
-
-hooks => HOC 혹은 커스텀 훅
-
-pages => 페이지
-
-stores => 전역 상태 관리
+# 찾아라 푸드트럭 프로젝트 소개 
 
 
----
+### 푸드트럭 위치 정보 공유 서비스
 
-| 작성 | 설명 |
-| --- | --- |
-| [FEAT]#이슈번호 내용 | 기능 추가 |
-| [FIX]#이슈번호 내용 | 버그 및 오류 수정 |
-| [DOCS]#이슈번호 내용 | 문서 수정 |
+프로젝트 기간: 
+기획 2023. 12. 25 - 2024. 12. 29 
+개발 2024. 01. 01 - 2024. 02. 08
 
----
+프로젝트 인원: 프론트엔드 2명, 백엔드 2명
+프로젝트 포지션: 프론트엔드
 
-Branch Convention
+담당 기능: 푸드트럭 상세페이지, 푸드트럭 리뷰/평점 등록, 가계부 기능
 
----
-| 작성             | 설명              |
-|----------------|-----------------|
-| main           | master 브랜치      |
-| develop        | main 서브 브랜치     |
-| feat/#이슈번호-기능명 | 기능 추가용 feat 브랜치 |
-| fix/#이슈번호-브랜치명 | 기능 수정용 fix 브랜치  |
+### 기능
+
+✅ 카카오맵을 이용한 지도 제공
+
+✅ 사용자들이 주도하는 위치 정보 등록 서비스
+
+✅ 나의 주변 푸드트럭 위치와 정보 공유
+
+## 기술스택
+
+### FrontEnd
+<div>
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=black">
+  <img src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=black">
+  <img src="https://img.shields.io/badge/amplify-FF9900?style=for-the-badge&logo=awsamplify&logoColor=black">
+</div>
+
+### BackEnd
+<div>
+  <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
+  <img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white"> 
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">   
+</div>
+
+### collaboration
+<div>
+  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">   
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">  
+  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=github&logoColor="white">
+</div>
